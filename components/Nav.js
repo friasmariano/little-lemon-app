@@ -1,5 +1,6 @@
 
 import Image from 'next/image';
+import Link from 'next/link';
 
 function Nav () {
     return (
@@ -12,22 +13,22 @@ function Nav () {
 
             <ul className="navLinks">
                 <li className="navLink">
-                    <a href="#">Home</a>
+                    <Link href="#">Home</Link>
                 </li>
                 <li className="navLink">
-                    <a href="#">About</a>
+                    <Link href="#">About</Link>
                 </li>
                 <li className="navLink">
-                    <a href="#">Menu</a>
+                    <Link href="#">Menu</Link>
                 </li>
                 <li className="navLink">
-                    <a href="#">Reservations</a>
+                    <Link href="#">Reservations</Link>
                 </li>
                 <li className="navLink">
-                    <a href="#">Order Online</a>
+                    <Link href="#">Order Online</Link>
                 </li>
                 <li className="navLink">
-                    <a href="#">Login</a>
+                    <Link href="#">Login</Link>
                 </li>
             </ul>
         </nav>
