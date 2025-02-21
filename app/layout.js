@@ -1,4 +1,6 @@
 import "./globals.css";
+import '@fortawesome/fontawesome-svg-core/styles.css';
+
 import Header from "@/components/Header";
 import Nav from "@/components/Nav";
 import Main from "@/components/Main";
@@ -22,7 +24,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <Header />
-        <Nav />
+        <Nav /> 
         <Main>
           {children}
         </Main>
