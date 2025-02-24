@@ -6,12 +6,6 @@ import Link from 'next/link';
 function Nav () {
     return (
         <nav className="nav">
-            {/* Enable  burger icon, after setting up Global state */}
-            {/* <div className="burgerIcon">
-                 <FontAwesomeIcon icon={faBars} 
-                    style={{ fontSize: '2em' }}/>
-            </div> */}
-
             <div className="burgerSection">
                 {/* Hide/Show using state */}
                 <FontAwesomeIcon icon={faBars} 
@@ -19,9 +13,9 @@ function Nav () {
 
                 <Image className="navBrand"
                         src="/Logo.svg"
-                        width={200}
-                        height={200}
-                        alt="logo" style={{ marginLeft: '10vw', width: '200px'}} />
+                        width={500}
+                        height={500}
+                        alt="logo" style={{ marginLeft: '10vw', width: '10rem'}} />
             </div>
 
             <ul className="navLinks">

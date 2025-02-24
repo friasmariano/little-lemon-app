@@ -1,0 +1,11 @@
+.default {
+    color: black;
+    background-color: #F4CE14;
+
+    width: 160px;
+    height: 35px;
+
+    border-radius: 16px;
+    font-weight: 600;
+    font-size: 1rem;
+}

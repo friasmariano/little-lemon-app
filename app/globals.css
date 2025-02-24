@@ -228,8 +228,8 @@ body {
 .main {
   grid-area: main;
 
-  background-color: #495E57;
-  color: hsl(192, 0%, 80%);
+  background-color: white;
+  color: #495E57;
 
   grid-column-start: 1;
   grid-column-end: 13;
@@ -243,9 +243,6 @@ body {
 
   text-align: center;
   justify-content: center;
-
-  margin-left: 20vw;
-  margin-right: 20vw;
 }
 
 .footer {

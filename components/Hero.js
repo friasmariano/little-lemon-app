@@ -1,8 +1,9 @@
+import styles from '@/styles/hero.module.css';
 
-export default function Hero() {
+export default function Hero({ children }) {
     return (
-        <>
-            <h1>Here goes the Hero</h1>
-        </>
+        <section className={styles.container}>
+            { children }
+        </section>
     );
 }

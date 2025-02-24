@@ -1,5 +1,7 @@
 import "./globals.css";
 import '@fortawesome/fontawesome-svg-core/styles.css';
+import { Karla } from 'next/font/google'
+import { Provider } from "@/components/ui/provider";
 
 import Header from "@/components/Header";
 import Nav from "@/components/Nav";
@@ -19,14 +21,22 @@ export const metadata = {
   ]
 }
 
+const karla = Karla({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  display: 'swap',
+});
+
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
         <Header />
         <Nav /> 
         <Main>
-          {children}
+          <Provider>
+            {children}
+          </Provider>
         </Main>
         <Footer />
       </body>
