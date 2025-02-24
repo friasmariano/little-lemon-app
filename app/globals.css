@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 :root {
   --background: #ffffff;
   --foreground: #2e2e2e;
@@ -163,6 +165,64 @@ body {
 
   justify-content: center;
 
+}
+
+@media (min-width: 768px) {
+  .burgerSection {
+    padding-bottom: 30px;
+  }
+}
+
+@media (max-width: 767px) {
+  .burgerSection {
+    display: flex;
+    align-items: center;
+
+    width: 100vw;
+
+    box-shadow: 0px 5px 20px rgba(0,0,0,0.1);
+  }
+  .burgerIcon {
+    padding-left: '10px';
+    padding: '0px';
+    
+    width: '20vw';
+    display: 'flex';
+    align-items: 'center';
+    justify-content: 'center';
+
+    color: grey;
+  }
+  .nav {
+    position: fixed;
+    width: 100vw;
+    justify-content: center;
+  }
+  .navBrand {
+    align-items: center;
+    justify-content: center;
+
+    margin-left: 0vw;
+
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    width: 100vw;
+
+  }
+  .nav, .navLinks {
+    flex-direction: column;
+    padding-bottom: 20px;
+
+    justify-content: center;
+    align-items: center;
+  }
+
+  .navLinks {
+    padding-top: 30px;
+    color: var(--grey-dark);
+    font-size: 1.05rem;
+  }
 }
 
 .main {
