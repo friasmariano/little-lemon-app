@@ -104,6 +104,10 @@ body {
     color: var(--secondary-light);
   }
   
+  .light-grey-bg {
+    background-color: var(--grey-light);
+  }
+  
   .grey-light {
     color: var(--grey-light);
   }
@@ -173,7 +177,7 @@ body {
       color-scheme: dark;
     }
   }
-  
+
   @media (prefers-color-scheme: light) {
     html {
       color-scheme: light;
@@ -187,7 +191,7 @@ body {
   color: #495E57;
 
   grid-column-start: 1;
-  grid-column-end: 13;
+  grid-column-end: 14;
 
   grid-row-start: 3;
   grid-row-end: 5;
@@ -196,8 +200,9 @@ body {
   flex-direction: column;
   flex: 1;
 
-  text-align: center;
-  justify-content: center;
+  /* text-align: center;
+  justify-content: center; */
+
 }
 
 .footer {
