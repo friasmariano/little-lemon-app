@@ -10,12 +10,19 @@ export default function Home() {
     <main className={styles.container}>
       <Hero>
         <div className={styles.section}>
-          <h1 className={styles.title}>Little Lemon</h1>
-          <h2 className={styles.subtitle}>Chicago</h2>
-          <p className={styles.description}>
+          <h1 className={`${styles.title} ${'markazi-text'}`}
+              style={{ fontSize: '3.5rem', marginTop: '-20px', padding: '0'}}>Little Lemon</h1>
+
+          <h2 className={`${'markazi-text'}`}
+              style={ {fontSize: '2.5rem', marginTop: '-30px', padding: '0'}}>Chicago</h2>
+
+          <p className={styles.description} style={{width: '40vw', marginTop: '20px'}}>
             We are a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist.
           </p>
-          <button className={buttonStyles.default} style={{ marginTop: '40px'}}>Order Now</button>
+          <button className={buttonStyles.default} 
+                  style={{ marginTop: '40px',
+                           boxShadow: '0 5px 15px rgba(0, 0, 0, 0.25)',
+                  }}>Reserve a Table</button>
         </div>
         <div className={styles.section}>
           <Image 
@@ -23,7 +30,12 @@ export default function Home() {
             alt="food"
             width={300}
             height={300}
-            style={{ borderRadius: '16px', marginLeft: '40px', width: '250px'}}
+            style={{ width: '250px', 
+                     borderRadius: '16px', 
+                     marginLeft: '40px', 
+                     marginBottom: '-50px',
+                     boxShadow: '0 5px 20px rgba(0, 0, 0, 0.5)'
+                  }}
           />
         </div>
       </Hero>

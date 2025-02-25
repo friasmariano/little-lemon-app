@@ -1,6 +1,6 @@
 import "./globals.css";
 import '@fortawesome/fontawesome-svg-core/styles.css';
-import { Karla } from 'next/font/google'
+import { Karla, Markazi_Text } from 'next/font/google'
 import { Provider } from "@/components/ui/provider";
 
 import Header from "@/components/Header";
@@ -24,13 +24,23 @@ export const metadata = {
 const karla = Karla({
   subsets: ['latin'],
   weight: ['400', '700'],
+  style: ['normal', 'italic'],
   display: 'swap',
+  variable: '--font-karla'
+});
+
+const markaziText = Markazi_Text({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  style: ['normal'],
+  display: 'swap',
+  variable: '--font-markazi-text'
 });
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
+      <body className={`${karla.variable} ${markaziText.variable}`}>
         <Header />
         <Nav /> 
         <Main>
