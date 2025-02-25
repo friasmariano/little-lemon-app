@@ -1,5 +1,8 @@
 .navBrand{
     display: flex;
+
+    align-items: center;
+    justify-content: center;
 }
 
 .navLinks {
@@ -24,7 +27,8 @@
     font-size: 0.9rem;
     font-weight: 600;
     color: var(--grey-medium);
-    margin: auto;
+
+    margin: auto 0px auto 0px;
 }
 
 @media (min-width: 768px) {

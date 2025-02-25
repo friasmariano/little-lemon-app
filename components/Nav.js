@@ -10,14 +10,14 @@ function Nav () {
             <div className={styles.burgerSection}>
                 {/* Hide/Show using state */}
                 <FontAwesomeIcon icon={faBars}
-                        className={`${burgerIcon} ${'visible md:invisible'}`}
+                        className={`${styles.burgerIcon} ${'visible md:invisible'}`}
                         style={{ fontSize: '2rem', paddingLeft: '30px' }}/>
 
                 <Image className={styles.navBrand}
                         src="/Logo.svg"
                         width={500}
                         height={500}
-                        alt="logo" style={{ marginLeft: '10vw', width: '10rem'}} />
+                        alt="logo" style={{ width: '8.5rem'}} />
             </div>
 
             <ul className={styles.navLinks}>
