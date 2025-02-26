@@ -1,13 +1,9 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import Hero from "@/components/Hero";
 import styles from  '@/styles/page.module.css'
 import buttonStyles from '@/styles/button.module.css';
 import Image from 'next/image';
 import Specials from "@/components/Specials";
-import specialsStyles from '@/styles/specials.module.css';
-import { Card } from "@chakra-ui/react"
-import { redirect } from "next/dist/server/api-utils";
+import Card from "@/components/Card";
 
 export default function Home() {
   return (
@@ -23,13 +19,14 @@ export default function Home() {
           <p className={styles.description} style={{width: '40vw', marginTop: '20px'}}>
             We are a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist.
           </p>
-          <button className={buttonStyles.default} 
+          <button className={buttonStyles.default}
                   style={{ marginTop: '40px',
                            boxShadow: '0 5px 15px rgba(0, 0, 0, 0.25)',
                   }}>Reserve a Table</button>
         </div>
+
         <div className={styles.section}>
-          <Image 
+          <Image
             src="/restauranfood.jpg"
             alt="food"
             width={300}
@@ -45,75 +42,27 @@ export default function Home() {
         </div>
       </Hero>
 
-      <Specials>
-        <section className={specialsStyles.section}>
-          <div className={specialsStyles.subsection}>
-            <h1 className={`${'markazi-text'}`}
-                style={{ fontSize: '2.5rem',
-                        padding: '0px'
-                }}>This is week specials!
-            </h1>
-          </div>
-          <div className={specialsStyles.subsection}
-               style={{ paddingLeft: '50px' }}>
-            <button className={buttonStyles.default}>Online Menu</button>
-          </div>
-        </section>
+      <Specials header={{ title: 'This is week specials!', actionButtonText: 'Online Menu'}}>
+        <Card
+          image = {{ src: '/Greek_salad.jpg', width: 250, height: 250, alt: 'Greek Salad' }}
+          header = {{ title: 'Greek Salad', details: '$ 12.99'}}
+          description = { 'The famous greek salad of crispy lettuce, peppers, olives and our Chicago style feta cheese, garnished with crunchy garlic and rosemary croutons.'}
+          callToAction = {{ text: 'Order a Delivery' }}
+        />
 
-        <section className={specialsStyles.section}>
-          <div>
-            <div style={{ width: '220px',
-                          height: '370px',
-                          borderRadius: '16px',
-                          boxShadow: '0 5px 15px rgba(0, 0, 0, 0.25)'}}
-                  className="light-grey-bg">
-              <Image
-                src="/Greek_salad.jpg"
-                width={220}
-                height={220}
-                alt="Greek Salad"
-                style={{ borderRadius: '16px'}}
-              />
+        <Card
+          image = {{ src: '/Brushetta.jpg', width: 250, height: 250, alt: 'Greek Salad' }}
+          header = {{ title: 'Brushetta', details: '$ 5.99'}}
+          description = { 'Our Brushetta is made from grilled bread that has been smeared with garlic and seasoned with salt, topped with fresh, diced tomatoes.'}
+          callToAction = {{ text: 'Order a Delivery' }}
+        />
 
-              <div style={{ display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            marginTop: '15px',
-                            gap: '20px'
-              }}>
-                <h4 style={{ color: 'black', fontWeight: '600', fontSize: '1.1rem' }}>Greek Salad</h4>
-                <h4 style={{ fontWeight: '600', fontSize: '1.1rem' }}>$ 12.99</h4>
-              </div>
-
-              <div style={{ display: 'flex', 
-                            justifyContent: 'center', 
-                            alignItems: 'center',
-                            width: '100%'}}>
-                <p style={{ fontSize: '0.9rem', paddingLeft: '10px', 
-                            paddingRight: '10px', paddingTop: '20px', 
-                            textAlign: 'left'}}>
-                  Fresh cucumbers, tomatoes, red onions, feta cheese, olives, 
-                  and our house dressing. Served with...
-                </p>
-              </div>
-
-              <div style={{ display: 'flex',
-                            color: 'black',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            fontSize: '1rem',
-                            fontWeight: '600',
-                            marginTop: '20px',
-                            marginLeft: '10px'}}>
-                Order a Delivery
-                <FontAwesomeIcon
-                  icon={faChevronRight}
-                  style={{ padding: '4px'}}
-                  />
-              </div>
-            </div>
-          </div>
-        </section>
+        <Card
+          image = {{ src: '/Lemon_dessert.jpg', width: 250, height: 250, alt: 'Greek Salad' }}
+          header = {{ title: 'Lemon Dessert', details: '$ 5.00'}}
+          description = { 'This comes straight from grandma’s recipe book, every last ingredient has been sourced and is as authentic as can be imagined.'}
+          callToAction = {{ text: 'Order a Delivery' }}
+        />
       </Specials>
 
     </main>
