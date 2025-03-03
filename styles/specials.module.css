@@ -30,7 +30,9 @@
     align-items: center;
     justify-content: center;
 
-    padding: 0px;
+    padding: 5vw;
 
     height: 150px;
+
+    margin: 0px 0px 0px 3vw;
 }

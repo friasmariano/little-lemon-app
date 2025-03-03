@@ -4,6 +4,8 @@ import buttonStyles from '@/styles/button.module.css';
 import Image from 'next/image';
 import Specials from "@/components/Specials";
 import Card from "@/components/Card";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar, faStarHalf } from "@fortawesome/free-solid-svg-icons";
 
 export default function Home() {
   return (
@@ -64,6 +66,56 @@ export default function Home() {
           callToAction = {{ text: 'Order a Delivery' }}
         />
       </Specials>
+
+      <section className={`${'light-grey-bg'}`}
+               style={{ height: '500px', 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        justifyContent: 'center',
+                        flexDirection: 'column' }}>
+        
+        <h3 className={`${'markazi-text'}`}
+            style={{ fontSize: '2.1rem',
+                     fontWeight: '600'}}>Testimonials</h3>
+
+        <div style={{ marginTop: '45px' }}>
+          <div style={{ width: '200px',
+                        backgroundColor: 'white',
+                        height: '170px',
+                        borderRadius: '16px',
+                        padding: '22px',
+                        display: 'flex',
+                        flexDirection: 'column'}}>
+            <div style={{ fontWeight: '600' }}>
+              <FontAwesomeIcon icon={ faStar } style={{ color: 'gold' }}/>
+              <FontAwesomeIcon icon={ faStar } style={{ color: 'gold' }}/>
+              <FontAwesomeIcon icon={ faStar } style={{ color: 'gold' }}/>
+              <FontAwesomeIcon icon={ faStar } style={{ color: 'gold' }}/>
+              <FontAwesomeIcon icon={ faStarHalf } style={{ color: 'gold' }}/>
+            </div>
+            <div style={{ display: 'flex', margin: '8px 0px 0px 0px' }}>
+              <div style={{ backgroundColor: 'grey',
+                            width: '75px',
+                            height: '65px',
+                            borderRadius: '10px' }}>
+
+              </div>
+              <div style={{ display: 'flex',
+                            flexDirection: 'column',
+                            padding: '8px 0px 0px 10px',
+                            fontWeight: '600'
+               }}>
+                <h4 style={{fontSize: '1rem'}}>Lorem</h4>
+                <h4 style={{fontSize: '1rem'}}>User</h4>
+              </div>
+            </div>
+            <h5 style={{ fontSize: '0.9rem',
+                         marginTop: '5px'
+             }}>Review Data</h5>
+          </div>
+        </div>
+
+      </section>
 
     </main>
   );

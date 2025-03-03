@@ -38,11 +38,9 @@ body {
     "header header header"
     "nav nav nav"
     "main main main"
-    "main main main"
-    "main main main"
     "footer footer footer";
 
-  grid-template-rows: auto auto 1fr 2fr 1fr auto;
+  grid-template-rows: auto auto auto auto;
 
   color: var(--foreground);
   background: var(--background);
@@ -112,6 +110,9 @@ body {
     color: var(--grey-light);
   }
   
+  .dark-grey-bg {
+    background-color: var(--grey-dark);
+  }
   .grey-dark {
     color: var(--grey-dark);
   }
