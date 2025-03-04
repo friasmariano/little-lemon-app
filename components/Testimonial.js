@@ -37,13 +37,14 @@ export default function Testimonial({ rating, avatar, comment, user }) {
 
 
     return(
-        <div style={{ width: '207px',
+        <div style={{ width: '216px',
                       backgroundColor: 'white',
-                      height: '233px',
+                      height: '248px',
                       borderRadius: '16px',
                       padding: '22px',
                       display: 'flex',
-                      flexDirection: 'column'}}>
+                      flexDirection: 'column',
+                      boxShadow: '1px 2px 20px rgba(0, 0, 0, 0.3)'}}>
 
             <div style={{ fontWeight: '600' }}>
                 {stars.map((star, index) => {
@@ -75,10 +76,10 @@ export default function Testimonial({ rating, avatar, comment, user }) {
                 </div>
             </div>
             <h5 style={{ fontSize: '0.9rem',
-                            marginTop: '5px'
+                            marginTop: '12px'
                 }}>
                     { comment }
-                </h5>
-            </div>
+            </h5>
+        </div>
     );
 }

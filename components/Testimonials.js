@@ -2,11 +2,12 @@
 export default function Testimonials({ children }) {
     return(
         <section className={`${'light-grey-bg'}`}
-                   style={{ height: '500px',
+                   style={{ minHeight: '500px',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            flexDirection: 'column' }}>
+                            flexDirection: 'column',
+                            padding: '80px 0px 110px 0px' }}>
 
             <h3 className={`${'markazi-text'}`}
                 style={{ fontSize: '2.1rem',

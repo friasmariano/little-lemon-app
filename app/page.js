@@ -6,6 +6,7 @@ import Specials from "@/components/Specials";
 import Card from "@/components/Card";
 import Testimonials from "@/components/Testimonials";
 import Testimonial from "@/components/Testimonial";
+import About from "@/components/About";
 
 export default function Home() {
   return (
@@ -70,26 +71,27 @@ export default function Home() {
       <Testimonials>
         <Testimonial
           avatar="/Woman_1.png"
-          comment="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          comment="Super friendly staff! They really paid attention to the little details!"
           rating={5}
           user={{ name: 'Jenna', lastname: 'Long' }}
         />
 
         <Testimonial
           avatar="/Man_1.png"
-          comment="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          comment="Our food came out fast. Definitely a spot worth coming back to!"
           rating={4.0}
           user={{ name: 'Marcus', lastname: 'Bold' }}
         />
 
       <Testimonial
           avatar="/Woman_2.png"
-          comment="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          comment="Everything was fresh, full of flavor, and perfectly cooked."
           rating={4.5}
           user={{ name: 'Tatiana', lastname: 'Velez' }}
         />
-
       </Testimonials>
+
+      <About />
 
     </main>
   );
