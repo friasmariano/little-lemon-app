@@ -1,12 +1,14 @@
+// 'use client';
+
+import { Provider } from "../components/ui/provider";
 import "./globals.css";
 import '@fortawesome/fontawesome-svg-core/styles.css';
-import { Karla, Markazi_Text } from 'next/font/google'
-import { Provider } from "@/components/ui/provider";
+import { Karla, Markazi_Text } from 'next/font/google';
 
-import Header from "@/components/Header";
-import Nav from "@/components/Nav";
-import Main from "@/components/Main";
-import Footer from "@/components/Footer";
+import Header from "../components/Header";
+import Nav from "../components/Nav";
+import Main from "../components/Main";
+import Footer from "../components/Footer";
 
 export const metadata = {
   title: "Little Lemon Website",
@@ -42,11 +44,11 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning>
       <body className={`${karla.variable} ${markaziText.variable}`}>
         <Header />
-        <Nav /> 
+        <Nav />
         <Main>
-          <Provider>
-            {children}
-          </Provider>
+            <Provider>
+              {children}
+            </Provider>
         </Main>
         <Footer />
       </body>

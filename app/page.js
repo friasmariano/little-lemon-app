@@ -1,3 +1,5 @@
+'use client';
+
 import Hero from "@/components/Hero";
 import styles from  '@/styles/page.module.css'
 import buttonStyles from '@/styles/button.module.css';
@@ -7,8 +9,16 @@ import Card from "@/components/Card";
 import Testimonials from "@/components/Testimonials";
 import Testimonial from "@/components/Testimonial";
 import About from "@/components/About";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
+
+  const reserveATable = (e) => {
+    e.preventDefault();
+    router.push('/booking');
+  }
+
   return (
     <main className={styles.container}>
       <Hero>
@@ -25,7 +35,9 @@ export default function Home() {
           <button className={buttonStyles.default}
                   style={{ marginTop: '40px',
                            boxShadow: '0 5px 15px rgba(0, 0, 0, 0.25)',
-                  }}>Reserve a Table</button>
+                           cursor: 'pointer'
+                  }}
+                  onClick={reserveATable}>Reserve a Table</button>
         </div>
 
         <div className={styles.section}>

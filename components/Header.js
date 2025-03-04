@@ -1,5 +1,5 @@
 
-function Header() {
+export default function Header() {
     return (
         <header className="header">
             <nav>
@@ -8,5 +8,3 @@ function Header() {
         </header>
     )
 }
-
-export default Header;

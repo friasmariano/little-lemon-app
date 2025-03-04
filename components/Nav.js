@@ -2,9 +2,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
 import Link from 'next/link';
-import styles from '@/styles/nav.module.css';
+import styles from '../styles/nav.module.css';
 
-function Nav () {
+export default function Nav () {
     return (
         <nav className="nav">
             <div className={styles.burgerSection}>
@@ -43,5 +43,3 @@ function Nav () {
         </nav>
     );
 }
-
-export default Nav;

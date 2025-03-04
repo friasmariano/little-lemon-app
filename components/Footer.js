@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 
-const Footer = () => {
+export default function Footer () {
     return (
         <footer className="footer">
             <div className="footerSection"
@@ -17,7 +17,7 @@ const Footer = () => {
 
             <div className="footerSection">
                 <ul className="footerNav">
-                    <b>Doormat Navigation</b>
+                    <b>Menu</b>
                     <li>
                         <a href="#">Home</a>
                     </li>
@@ -55,6 +55,3 @@ const Footer = () => {
         </footer>
     );
 };
-
-export default Footer;
-
