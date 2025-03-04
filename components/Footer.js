@@ -4,8 +4,9 @@ import Image from 'next/image';
 const Footer = () => {
     return (
         <footer className="footer">
-            <div>
-                <Image 
+            <div className="footerSection"
+                 style={{ padding: '28px 0px 0px 0px' }}>
+                <Image
                     className="navBrand"
                     src="/Logo.svg"
                     width={100}
@@ -13,7 +14,7 @@ const Footer = () => {
                     alt="logo"
                 />
             </div>
-            
+
             <div className="footerSection">
                 <ul className="footerNav">
                     <b>Doormat Navigation</b>
