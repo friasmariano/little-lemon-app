@@ -1,0 +1,84 @@
+
+.container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 50px auto 100px auto;
+    flex-direction: column;
+}
+
+.section {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    font-weight: 600;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.dateContainer {
+    display: flex;
+    align-Items: center;
+    justify-content: center;
+    gap: 10px;
+    max-width: 100px;
+    margin: 0 auto;
+}
+
+.dateSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.errors {
+    display: flex;
+    flex-direction: column;
+
+    color: rgb(241, 12, 47);
+
+    margin: 10px 0px 10px 0px;
+    min-width: 400px;
+
+    justify-content: center;
+
+    font-size: 0.95rem;
+    align-items: center;
+}
+
+.submit {
+    margin-top: 40px;
+}
+
+.input {
+    border-radius: 16px;
+
+    height: 30px;
+    min-width: 200px;
+    text-align: center;
+
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.fieldset {
+    border: 1px solid #EDEFEE;
+
+    display: flex;
+
+    flex-direction: column;
+
+    margin: auto;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 20px;
+    padding-bottom: 30px;
+}
