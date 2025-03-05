@@ -1,14 +1,14 @@
 'use client';
 
-import Hero from "@/components/Hero";
-import styles from  '@/styles/page.module.css'
-import buttonStyles from '@/styles/button.module.css';
+import Hero from "../components/Hero";
+import styles from  '../styles/page.module.css'
+import buttonStyles from '../styles/button.module.css';
 import Image from 'next/image';
-import Specials from "@/components/Specials";
-import Card from "@/components/Card";
-import Testimonials from "@/components/Testimonials";
-import Testimonial from "@/components/Testimonial";
-import About from "@/components/About";
+import Specials from "../components/Specials";
+import Card from "../components/Card";
+import Testimonials from "../components/Testimonials";
+import Testimonial from "../components/Testimonial";
+import About from "../components/About";
 import { useRouter } from "next/navigation";
 
 export default function Home() {

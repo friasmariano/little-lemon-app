@@ -1,6 +1,4 @@
-// 'use client';
 
-import { Provider } from "../components/ui/provider";
 import "./globals.css";
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { Karla, Markazi_Text } from 'next/font/google';
@@ -46,9 +44,7 @@ export default function RootLayout({ children }) {
         <Header />
         <Nav />
         <Main>
-            <Provider>
-              {children}
-            </Provider>
+            {children}
         </Main>
         <Footer />
       </body>

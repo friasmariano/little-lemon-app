@@ -1,5 +1,5 @@
-import styles from '@/styles/specials.module.css';
-import buttonStyles from  '@/styles/button.module.css';
+import styles from '../styles/specials.module.css';
+import buttonStyles from  '../styles/button.module.css';
 
 export default function Specials({ header, children }) {
     return (

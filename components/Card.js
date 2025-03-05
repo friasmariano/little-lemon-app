@@ -1,4 +1,4 @@
-import cardS from '@/styles/card.module.css'
+import cardS from '../styles/card.module.css'
 import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
