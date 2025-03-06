@@ -10,7 +10,10 @@ import Modal from './Modal'
 import buttonStyles from '../styles/button.module.css'
 import styles from '../styles/bookform.module.css'
 
-export default function BookingForm({ sectionNames }) {
+export default function BookingForm({ sectionNames, availableTimes, setAvailableTimes }) {
+    console.log('Available Times', availableTimes);
+
+    const [selectedTime, setSelectedTime] = useState('17:00');
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModal = () => setIsModalOpen(true);
@@ -294,13 +297,14 @@ export default function BookingForm({ sectionNames }) {
                 <div className={styles.section}>
                     <label className={styles.subtitle}
                            htmlFor="rest-time">Choose time</label>
-                    <select id="rest-time">
-                        <option>17:00</option>
-                        <option>18:00</option>
-                        <option>19:00</option>
-                        <option>20:00</option>
-                        <option>21:00</option>
-                        <option>22:00</option>
+                    <select id="rest-time" value={selectedTime}
+                     onChange={e => setSelectedTime(e.target.value)}
+                    >
+                        {availableTimes.map((time) =>
+                            <option key={time.id}>
+                                {time.value}
+                            </option>
+                        )}
                     </select>
                 </div>
 
@@ -405,10 +409,9 @@ export default function BookingForm({ sectionNames }) {
                     Make reservation
                 </button>
 
-                <div styles={{ display: 'flex', gap: '30px'}}>
-                    <button className={buttonStyles.default} onClick={openModal}>Open Modal</button>
-                    <button className={buttonStyles.cancel} onClick={closeModal}>Close Modal</button>
-                </div>
+                <pre>
+                    <li></li>
+                </pre>
             </div>
 
         </form>

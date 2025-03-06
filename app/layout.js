@@ -3,10 +3,10 @@ import "./globals.css";
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { Karla, Markazi_Text } from 'next/font/google';
 
-import Header from "../components/Header";
-import Nav from "../components/Nav";
-import Main from "../components/Main";
-import Footer from "../components/Footer";
+import Header from "../components/Header.jsx";
+import Nav from "../components/Nav.jsx";
+import Main from "../components/Main.jsx";
+import Footer from "../components/Footer.jsx";
 
 export const metadata = {
   title: "Little Lemon Website",
