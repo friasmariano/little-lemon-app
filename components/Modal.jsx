@@ -27,7 +27,6 @@ export default function Modal({ isOpen, onClose, children, title, callBackFuncti
         <dialog className={isOpen ? styles.dialog: styles.hidden}
                 ref={dialogRef} onClick={handleBackdropClick}
                 style={{ display: 'flex',
-                         width: '100vw',
                          alignItems: 'center',
                          justifyContent: 'center',
                          marginRight: 'auto ',
@@ -39,7 +38,7 @@ export default function Modal({ isOpen, onClose, children, title, callBackFuncti
                 <div style={{ display: 'flex',
                               borderRadius: '16px 16px 0px 0px',
                               height: '55px' }}>
-                    <p style={{ width: '88vw',
+                    <p style={{ width: '87vw',
                                 padding: '0px 0px 0px 15px',
                                 textAlign: 'center',
                                 fontSize: '1.3rem',
@@ -51,7 +50,7 @@ export default function Modal({ isOpen, onClose, children, title, callBackFuncti
                     }}>
                         { title }
                     </p>
-                    <button style={{ width: '5w',
+                    <button style={{ width: '50px',
                                      display: 'flex',
                                      alignItems: 'center',
                                      justifyContent: 'center',

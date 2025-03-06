@@ -13,11 +13,13 @@ export default function Nav () {
                         className={`${styles.burgerIcon} ${'visible md:invisible'}`}
                         style={{ fontSize: '2rem', paddingLeft: '30px' }}/>
 
-                <Image className={styles.navBrand}
-                        src="/Logo.svg"
-                        width={500}
-                        height={500}
-                        alt="logo" style={{ width: '8.5rem'}} />
+                <Link href="/">
+                    <Image className={styles.navBrand}
+                            src="/Logo.svg"
+                            width={500}
+                            height={500}
+                            alt="logo" style={{ width: '8.5rem'}} />
+                </Link>
             </div>
 
             <ul className={styles.navLinks}>
