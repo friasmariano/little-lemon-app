@@ -1,15 +1,22 @@
 'use client'
 
 import { useForm } from 'react-hook-form'
+import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 import { ErrorMessage } from "@hookform/error-message"
+import Modal from './Modal'
 
 import buttonStyles from '../styles/button.module.css'
 import styles from '../styles/bookform.module.css'
 
 export default function BookingForm() {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm({
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const openModal = () => setIsModalOpen(true);
+    const closeModal = () => setIsModalOpen(false);
+
+    const { register, handleSubmit, watch, formState: { errors, isValid, isDirty } } = useForm({
         mode: 'onBlur'
     });
 
@@ -22,8 +29,14 @@ export default function BookingForm() {
         <form onSubmit={handleSubmit(onSubmit)}
               className={styles.container}>
 
+              <Modal isOpen={isModalOpen} onClose={closeModal} title='Confirmation'>
+                <div>
+                    Modal body
+                </div>
+              </Modal>
+
             <fieldset className={styles.fieldset}>
-                <legend className="text-xl mb-4">Personal Data</legend>
+                <legend className="text-xl mb-4">Personal</legend>
 
                 {/* Name */}
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -35,7 +48,7 @@ export default function BookingForm() {
                             id="name"
                             name="name"
                             type="text"
-                            defaultValue=""
+                            defaultValue="Joe"
                             {...register("name", {
                                     required: "The 'name' field is required",
                                     minLength: {
@@ -77,7 +90,7 @@ export default function BookingForm() {
                             id="lastname"
                             name="lastname"
                             type="text"
-                            defaultValue=""
+                            defaultValue="Doe"
                             {...register("lastname", {
                                     required: "The 'lastname' field is required",
                                     minLength: {
@@ -119,7 +132,7 @@ export default function BookingForm() {
                             id="phone"
                             name="phone"
                             type="text"
-                            defaultValue=""
+                            defaultValue="-"
                             {...register("phone", {
                                     required: "The 'phone' field is required",
                                     pattern: {
@@ -154,7 +167,7 @@ export default function BookingForm() {
             </fieldset>
 
             <fieldset className={styles.fieldset}>
-                <legend className="text-xl mb-4">Reservation Info</legend>
+                <legend className="text-xl mb-4">Reservation</legend>
 
                 {/* Date */}
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -343,7 +356,7 @@ export default function BookingForm() {
             </fieldset>
 
             <fieldset className={styles.fieldset}>
-                <legend className="text-xl mb-4">Financial</legend>
+                <legend className="text-xl mb-4">Payment</legend>
 
                 {/* Credit Card */}
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -387,8 +400,15 @@ export default function BookingForm() {
 
             {/* Submit */}
             <div className={`${styles.section} ${styles.submit}`}>
-                <input className={buttonStyles.default}
-                   type="submit" value="Make reservation" />
+                <button className={isValid ? buttonStyles.default : buttonStyles.disabled}
+                        type="submit" disabled={isValid}>
+                    Make reservation
+                </button>
+
+                <div styles={{ display: 'flex', gap: '30px'}}>
+                    <button className={buttonStyles.default} onClick={openModal}>Open Modal</button>
+                    <button className={buttonStyles.cancel} onClick={closeModal}>Close Modal</button>
+                </div>
             </div>
 
         </form>
