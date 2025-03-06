@@ -12,7 +12,7 @@ export default function BookTable() {
                     <p style={{ fontSize: '1.3rem' }}>Book your visit in your favorite spot</p>
                 </div>
             </Hero>
-            <BookingForm />
+            <BookingForm sectionNames={['Personal', 'Reservation', 'Payment']} />
         </main>
     );
 }

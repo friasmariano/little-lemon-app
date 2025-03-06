@@ -10,7 +10,7 @@ import Modal from './Modal'
 import buttonStyles from '../styles/button.module.css'
 import styles from '../styles/bookform.module.css'
 
-export default function BookingForm() {
+export default function BookingForm({ sectionNames }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModal = () => setIsModalOpen(true);
@@ -36,7 +36,7 @@ export default function BookingForm() {
               </Modal>
 
             <fieldset className={styles.fieldset}>
-                <legend className="text-xl mb-4">Personal</legend>
+                <legend className="text-xl mb-4">{sectionNames[0]}</legend>
 
                 {/* Name */}
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -167,7 +167,7 @@ export default function BookingForm() {
             </fieldset>
 
             <fieldset className={styles.fieldset}>
-                <legend className="text-xl mb-4">Reservation</legend>
+                <legend className="text-xl mb-4">{sectionNames[1]}</legend>
 
                 {/* Date */}
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -356,7 +356,7 @@ export default function BookingForm() {
             </fieldset>
 
             <fieldset className={styles.fieldset}>
-                <legend className="text-xl mb-4">Payment</legend>
+                <legend className="text-xl mb-4">{sectionNames[2]}</legend>
 
                 {/* Credit Card */}
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
