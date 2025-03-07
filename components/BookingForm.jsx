@@ -10,15 +10,20 @@ import Modal from './Modal'
 import buttonStyles from '../styles/button.module.css'
 import styles from '../styles/bookform.module.css'
 
-export default function BookingForm({ sectionNames, availableTimes, setAvailableTimes }) {
+export default function BookingForm({ sectionNames, availableTimes, updateTimes }) {
     console.log('Available Times', availableTimes);
 
-    const [selectedTime, setSelectedTime] = useState('17:00');
+    // const [selectedTime, setSelectedTime] = useState('17:00');
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
 
+    const handleDateChange = (event) => {
+        updateTimes(event.target.value);
+    }
+
+    // Hook Forms
     const { register, handleSubmit, watch, formState: { errors, isValid, isDirty } } = useForm({
         mode: 'onBlur'
     });
@@ -297,15 +302,21 @@ export default function BookingForm({ sectionNames, availableTimes, setAvailable
                 <div className={styles.section}>
                     <label className={styles.subtitle}
                            htmlFor="rest-time">Choose time</label>
-                    <select id="rest-time" value={selectedTime}
-                     onChange={e => setSelectedTime(e.target.value)}
-                    >
+                    {/* <select id="rest-time" value={selectedTime}
+                     onChange={e => setSelectedTime(e.target.value)}>
                         {availableTimes.map((time) =>
                             <option key={time.id}>
                                 {time.value}
                             </option>
                         )}
-                    </select>
+                    </select> */}
+
+                    {availableTimes.map(({ id, hour, minute, meridian, available }) => {
+                        <div key={id}>
+                            <input type="checkbox" checked={available} readonly/>
+                            <label>{`${hour}:${minute.toString().padStart(2, "0")} ${meridian}`}</label>
+                        </div>
+                    })}
                 </div>
 
                 {/* Guests */}
@@ -408,10 +419,6 @@ export default function BookingForm({ sectionNames, availableTimes, setAvailable
                         type="submit" disabled={isValid}>
                     Make reservation
                 </button>
-
-                <pre>
-                    <li></li>
-                </pre>
             </div>
 
         </form>
