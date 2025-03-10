@@ -3,7 +3,7 @@
 import BookingForm from "../../components/BookingForm.jsx";
 import Hero from "../../components/Hero.jsx";
 import { useState } from "react";
-import { useAvailableTimes } from "../../hooks/useAvailableTimes.jsx";
+import { useAvailableTimes, initializeTimes } from "../../hooks/useAvailableTimes.jsx";
 
 export default function BookTable() {
     const [state, dispatch] = useAvailableTimes();
@@ -14,7 +14,7 @@ export default function BookTable() {
 
         dispatch({
             type: "SET_AVAILABLE_TIMES",
-            payload: state
+            payload: initializeTimes()
         })
     }
 
