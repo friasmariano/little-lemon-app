@@ -1,27 +1,26 @@
 'use client'
 
 import { useForm } from 'react-hook-form'
-import { useState } from 'react'
+import { useState, useReducer } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendar, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 import { ErrorMessage } from "@hookform/error-message"
 import Modal from './Modal'
-
 import buttonStyles from '../styles/button.module.css'
 import styles from '../styles/bookform.module.css'
+import { updateTimes, initializeTimes, RESERVE_TIME } from '../hooks/useAvailableTimes'
 
-export default function BookingForm({ sectionNames, availableTimes, updateTimes }) {
-    console.log('Available Times', availableTimes);
+export default function BookingForm({ sectionNames}) {
+    const [times, dispatch] = useReducer(updateTimes, initializeTimes());
 
-    const [selectedTime, setSelectedTime] = useState('05:00 PM');
+    const handleChange = (event) => {
+        dispatch({ type: RESERVE_TIME, payload: { value: event.target.value } })
+    }
+
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
-
-    const handleDateChange = (event) => {
-        updateTimes(event.target.value);
-    }
 
     // Hook Forms
     const { register, handleSubmit, watch, formState: { errors, isValid, isDirty } } = useForm({
@@ -256,17 +255,17 @@ export default function BookingForm({ sectionNames, availableTimes, updateTimes 
                                   margin: '5px 0px 20px 0px' }}>
                         <label className={styles.subtitle}
                                htmlFor="time">Choose time</label>
+
                         <select id="time"
-                                value={selectedTime}
-                                onChange={e => setSelectedTime(e.target.value)}
+                                onChange={handleChange}
                                 style={{ borderRadius: '16px',
                                          padding: '5px 0px 5px 0px',
                                          border: '1px solid rgba(102, 102, 102, 0.3)'}}>
-                            {availableTimes
-                                .filter(time => time.available)
+                            <option value="">Select a time</option>
+                            {times
                                 .map((time) =>
                                 <option key={time.id} value={time.value}>
-                                    {time.value}
+                                    {time.value} {time.available ? '' : '(Reserved)'}
                                 </option>
                             )}
                         </select>

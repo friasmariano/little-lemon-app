@@ -2,21 +2,8 @@
 
 import BookingForm from "../../components/BookingForm.jsx";
 import Hero from "../../components/Hero.jsx";
-import { useState } from "react";
-import { useAvailableTimes, initializeTimes } from "../../hooks/useAvailableTimes.jsx";
 
 export default function BookTable() {
-    const [state, dispatch] = useAvailableTimes();
-    const [selectedDate, setSelectedDate] = useState(null);
-
-    const updateTimes = (date) => {
-        setSelectedDate(date);
-
-        dispatch({
-            type: "SET_AVAILABLE_TIMES",
-            payload: initializeTimes()
-        })
-    }
 
     return(
         <main>
@@ -30,8 +17,6 @@ export default function BookTable() {
             </Hero>
             <BookingForm
                 sectionNames={['Personal', 'Reservation', 'Payment']}
-                availableTimes={state}
-                updateTimes={updateTimes}
             />
         </main>
     );
