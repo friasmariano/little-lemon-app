@@ -1,16 +1,16 @@
 'use client'
 
 import { useForm } from 'react-hook-form'
-import { useState, useReducer } from 'react'
+import { useEffect, useState, useReducer } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendar, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 import { ErrorMessage } from "@hookform/error-message"
-// import Modal from './Modal'
+import Modal from './Modal'
 import buttonStyles from '../styles/button.module.css'
 import styles from '../styles/bookform.module.css'
 import { updateTimes, initializeTimes, RESERVE_TIME } from '../hooks/useAvailableTimes'
 
-export default function BookingForm({ sectionNames}) {
+export default function BookingForm({ sectionNames }) {
     const [times, dispatch] = useReducer(updateTimes, initializeTimes());
 
     const handleChange = (event) => {
@@ -34,11 +34,11 @@ export default function BookingForm({ sectionNames}) {
 
     return(
         <>
-            {/* <Modal isOpen={isModalOpen} onClose={closeModal} title='Confirmation'>
+            <Modal isOpen={isModalOpen} onClose={closeModal} title='Confirmation'>
                 <div>
                     Modal body
                 </div>
-              </Modal> */}
+              </Modal>
 
             <form onSubmit={handleSubmit(onSubmit)}
                   className={styles.container}>
@@ -372,10 +372,21 @@ export default function BookingForm({ sectionNames}) {
                 </fieldset>
 
                 {/* Submit */}
-                <div className={`${styles.section} ${styles.submit}`}>
-                    <button className={isValid ? buttonStyles.default : buttonStyles.disabled}
-                            type="submit" disabled={isValid}>
+                {/* disabled={isValid}> */}
+                {/* className={isValid ? buttonStyles.default : buttonStyles.disabled} */}
+                <div className={`${styles.submit}`}>
+                    <button className={buttonStyles.default}
+                            type="submit"
+                            onClick={() => {
+                                openModal()
+                            }}>
                         Make reservation
+                    </button>
+                    <button className={buttonStyles.cancel}
+                            onClick={() => {
+                                closeModal()
+                            }}>
+                        Cancel
                     </button>
                 </div>
 

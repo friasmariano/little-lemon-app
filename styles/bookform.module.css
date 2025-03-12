@@ -55,6 +55,12 @@
 
 .submit {
     margin-top: 40px;
+
+    display: flex;
+
+    margin: 30px auto auto auto;
+
+    gap: 20px;
 }
 
 .input {
