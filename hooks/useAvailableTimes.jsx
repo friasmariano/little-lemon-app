@@ -1,6 +1,5 @@
 
-export const RESERVE_TIME = 'RESERVE_TIME';
-
+// State Initialization
 export const initializeTimes = () => {
     return [
         { id: 0, value: '05:00 PM', available: true},
@@ -12,6 +11,10 @@ export const initializeTimes = () => {
     ];
 };
 
+// Actions Definition
+export const RESERVE_TIME = 'RESERVE_TIME';
+
+// Reducer Function Conditionals
 export const updateTimes = (state, action) => {
     switch(action.type) {
         case RESERVE_TIME:

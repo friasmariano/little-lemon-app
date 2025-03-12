@@ -5,7 +5,7 @@ import { useState, useReducer } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendar, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 import { ErrorMessage } from "@hookform/error-message"
-import Modal from './Modal'
+// import Modal from './Modal'
 import buttonStyles from '../styles/button.module.css'
 import styles from '../styles/bookform.module.css'
 import { updateTimes, initializeTimes, RESERVE_TIME } from '../hooks/useAvailableTimes'
@@ -34,18 +34,18 @@ export default function BookingForm({ sectionNames}) {
 
     return(
         <>
-            <Modal isOpen={isModalOpen} onClose={closeModal} title='Confirmation'>
+            {/* <Modal isOpen={isModalOpen} onClose={closeModal} title='Confirmation'>
                 <div>
                     Modal body
                 </div>
-              </Modal>
+              </Modal> */}
 
             <form onSubmit={handleSubmit(onSubmit)}
                   className={styles.container}>
 
                 {/* Personal */}
                 <fieldset className={styles.fieldset}>
-                    <legend className="text-xl mb-4">{sectionNames[0]}</legend>
+                    <legend className="text-xl mb-4">Personal</legend>
 
                     {/* Name */}
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -177,7 +177,7 @@ export default function BookingForm({ sectionNames}) {
 
                 {/* Reservation */}
                 <fieldset className={styles.fieldset}>
-                    <legend className="text-xl mb-4">{sectionNames[1]}</legend>
+                    <legend className="text-xl mb-4">Reservation</legend>
 
                     {/* Date */}
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -330,7 +330,7 @@ export default function BookingForm({ sectionNames}) {
 
                 {/* Credit Card */}
                 <fieldset className={styles.fieldset}>
-                    <legend className="text-xl mb-4">{sectionNames[2]}</legend>
+                    <legend className="text-xl mb-4">Credit Card</legend>
 
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                         <div className={styles.section}>
