@@ -1,6 +1,17 @@
 
 // State Initialization
-export const initializeTimes = () => {
+export const initializeTimes = (timesSet) => {
+
+    if (timesSet && timesSet.length > 0) {
+        const updatedTimeset = timesSet.map((e, index) => ({
+            id: index,
+            value: e,
+            available: true
+        }))
+
+        return updatedTimeset;
+    }
+
     return [
         { id: 0, value: '05:00 PM', available: true},
         { id: 1, value: '06:00 PM', available: true},

@@ -1,6 +1,7 @@
 'use client'
 
 import { useForm } from 'react-hook-form'
+// Date-fns
 import { useEffect, useState, useReducer } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendar, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
@@ -9,9 +10,11 @@ import Modal from './Modal'
 import buttonStyles from '../styles/button.module.css'
 import styles from '../styles/bookform.module.css'
 import { updateTimes, initializeTimes, RESERVE_TIME } from '../hooks/useAvailableTimes'
+import { fetchAPI, seededRandom, submitAPI } from '../api/api.jsx'
 
 export default function BookingForm({ sectionNames }) {
-    const [times, dispatch] = useReducer(updateTimes, initializeTimes());
+
+    const [times, dispatch] = useReducer(updateTimes, initializeTimes(fetchAPI(new Date())));
 
     const handleChange = (event) => {
         dispatch({ type: RESERVE_TIME, payload: { value: event.target.value } })

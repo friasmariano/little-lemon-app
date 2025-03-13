@@ -1,4 +1,6 @@
-const seededRandom = function (seed) {
+
+
+export const seededRandom = function (seed) {
     var m = 2**35 - 31;
     var a = 185852;
     var s = seed % m;
@@ -7,7 +9,7 @@ const seededRandom = function (seed) {
     };
 }
 
-const fetchAPI = function(date) {
+export const fetchAPI = function(date) {
     let result = [];
     let random = seededRandom(date.getDate());
 
@@ -21,6 +23,7 @@ const fetchAPI = function(date) {
     }
     return result;
 };
-const submitAPI = function(formData) {
+
+export const submitAPI = function(formData) {
     return true;
 };
