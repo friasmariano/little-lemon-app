@@ -1,18 +1,30 @@
 'use client'
 
 import { useForm } from 'react-hook-form'
-// Date-fns
 import { useEffect, useState, useReducer } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendar, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+import { faCalendar, faCheckCircle, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 import { ErrorMessage } from "@hookform/error-message"
 import Modal from './Modal'
 import buttonStyles from '../styles/button.module.css'
 import styles from '../styles/bookform.module.css'
 import { updateTimes, initializeTimes, RESERVE_TIME } from '../hooks/useAvailableTimes'
 import { fetchAPI, seededRandom, submitAPI } from '../api/api.jsx'
+import { getDate, getMonth, getYear, isFuture, parseISO } from 'date-fns'
 
 export default function BookingForm({ sectionNames }) {
+    const currentMonth = () => {
+        let temp = getMonth(new Date()) + 1
+
+        if (temp < 10 )
+            temp = '0' + temp
+
+        return temp
+    }
+
+    const [month, setMonth] = useState(currentMonth)
+
+    const [currentDate, setCurrentDate] = useState(`${getYear(new Date())}-${month}-${getDate(new Date())}`);
 
     const [times, dispatch] = useReducer(updateTimes, initializeTimes(fetchAPI(new Date())));
 
@@ -27,20 +39,41 @@ export default function BookingForm({ sectionNames }) {
 
     // Hook Forms
     const { register, handleSubmit, watch, formState: { errors, isValid, isDirty } } = useForm({
-        mode: 'onBlur'
+        mode: 'onChange'
     });
 
     const onSubmit = (data) => {
-        alert('Reservation submitted succesfully.');
         console.log(data);
+
+        openModal();
+        // Add redirection
     }
 
     return(
         <>
-            <Modal isOpen={isModalOpen} onClose={closeModal} title='Confirmation'>
-                <div>
-                    Modal body
-                </div>
+            <Modal isOpen={isModalOpen} onClose={closeModal} title='Confirmation' footer={false}>
+                <section style={{ display: 'flex', alignItems: 'center'}}>
+                    <p className="dark-grey"
+                        style={{ fontSize: '2.1rem',
+                                 textAlign: 'center',
+                                 display: 'flex',
+                                 margin: '30px auto 0px auto',
+                                 alignItems: 'center',
+                                 flexDirection: 'column',
+                                 padding: '30px 0px 85px 0px'
+                              }}>
+                        <FontAwesomeIcon
+                            icon={faCheckCircle}
+                            style={{ fontSize: '4rem',
+                                     marginBottom: '20px'
+                             }}/>
+                        <span style={{ color: '#666666',
+                                       fontWeight: '600'
+                         }}>
+                            Reservation submitted successfully
+                        </span>
+                    </p>
+                </section>
               </Modal>
 
             <form onSubmit={handleSubmit(onSubmit)}
@@ -60,7 +93,7 @@ export default function BookingForm({ sectionNames }) {
                                 id="name"
                                 name="name"
                                 type="text"
-                                defaultValue="Joe"
+                                defaultValue=""
                                 {...register("name", {
                                         required: "The 'name' field is required",
                                         minLength: {
@@ -102,7 +135,7 @@ export default function BookingForm({ sectionNames }) {
                                 id="lastname"
                                 name="lastname"
                                 type="text"
-                                defaultValue="Doe"
+                                defaultValue=""
                                 {...register("lastname", {
                                         required: "The 'lastname' field is required",
                                         minLength: {
@@ -144,7 +177,7 @@ export default function BookingForm({ sectionNames }) {
                                 id="phone"
                                 name="phone"
                                 type="text"
-                                defaultValue="-"
+                                defaultValue=""
                                 {...register("phone", {
                                         required: "The 'phone' field is required",
                                         pattern: {
@@ -196,6 +229,7 @@ export default function BookingForm({ sectionNames }) {
                                     type="date"
                                     id="date"
                                     name="date"
+                                    value={currentDate}
                                     style={{
                                         padding: '8px',
                                         borderRadius: '5px',
@@ -203,6 +237,12 @@ export default function BookingForm({ sectionNames }) {
                                         fontSize: '16px',
                                         cursor: 'pointer',
                                         textAlign: 'center'
+                                    }}
+                                    {...register('reservationDate', {
+                                        valueAsDate: true
+                                    })}
+                                    onChange={(e) => {
+                                        setCurrentDate(e.target.value)
                                     }}
                                 />
                                 <span
@@ -223,31 +263,13 @@ export default function BookingForm({ sectionNames }) {
                         <div className={styles.errors}>
                             <ErrorMessage
                                         errors={errors}
-                                        name="day"
+                                        name="reservationDate"
                                         render={({ message }) =>
                                         <p>
                                             <FontAwesomeIcon icon={faInfoCircle} style={{ marginRight: '5px'}} />
                                             {message}
                                         </p>}
                                     />
-                            <ErrorMessage
-                                            errors={errors}
-                                            name="month"
-                                            render={({ message }) =>
-                                            <p>
-                                                <FontAwesomeIcon icon={faInfoCircle} style={{ marginRight: '5px'}} />
-                                                {message}
-                                            </p>}
-                                        />
-                            <ErrorMessage
-                                            errors={errors}
-                                            name="year"
-                                            render={({ message }) =>
-                                            <p>
-                                                <FontAwesomeIcon icon={faInfoCircle} style={{ marginRight: '5px'}} />
-                                                {message}
-                                            </p>}
-                                        />
                         </div>
                     </div>
 
@@ -262,9 +284,8 @@ export default function BookingForm({ sectionNames }) {
                         <select id="time"
                                 onChange={handleChange}
                                 style={{ borderRadius: '16px',
-                                         padding: '5px 0px 5px 0px',
+                                         padding: '5px 0px 5px 5px',
                                          border: '1px solid rgba(102, 102, 102, 0.3)'}}>
-                            <option value="">Select a time</option>
                             {times
                                 .map((time) =>
                                 <option key={time.id} value={time.value}>
@@ -348,7 +369,7 @@ export default function BookingForm({ sectionNames }) {
                                 {...register("card", {
                                         required: "The 'card' field is required",
                                         pattern: {
-                                            value: /^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|6(?:011|5[0-9]{2})[0-9]{12})$/,
+                                            value: /4[0-9]{12}(?:[0-9]{3})?$/,
                                             message: "The 'credit card' has an invalid format"
                                         }
                                 })}
@@ -376,20 +397,10 @@ export default function BookingForm({ sectionNames }) {
 
                 {/* Submit */}
                 {/* disabled={isValid}> */}
-                {/* className={isValid ? buttonStyles.default : buttonStyles.disabled} */}
                 <div className={`${styles.submit}`}>
-                    <button className={buttonStyles.default}
-                            type="submit"
-                            onClick={() => {
-                                openModal()
-                            }}>
+                    <button className={isValid ? buttonStyles.default : buttonStyles.disabled}
+                            type="submit">
                         Make reservation
-                    </button>
-                    <button className={buttonStyles.cancel}
-                            onClick={() => {
-                                closeModal()
-                            }}>
-                        Cancel
                     </button>
                 </div>
 

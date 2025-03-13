@@ -21,20 +21,20 @@ export default function BookingConfirmation() {
                               alignItems: 'center'
              }}>
                 <div style={{ minWidth: '600px',
-                              minHeight: '325px',
+                              minHeight: '340px',
                               borderRadius: '16px',
                               boxShadow: '0px 5px 20px rgba(0,0,0,0.15)',
                               marginTop: '50px'}}>
-                    <h1 style={{ margin: '90px 0px 0px 0px',
-                                fontSize: '2.2rem',
-                                fontWeight: '600',
-                                color: '#666666'
+                    <h1 className="markazi-text"
+                        style={{ margin: '90px 0px 0px 0px',
+                                 fontSize: '2.1rem',
+                                 color: 'rgba(102, 102, 102, 0.9)'
 
                     }}>You're table it's been reserved</h1>
                     <div style={{ width: '100%',
-                                  height: 'px',
+                                  height: '3px',
                                   marginTop: '10px',
-                                  backgroundColor: 'rgba(102, 102, 102, 0.3)'  }}>
+                                  backgroundColor: 'rgba(102, 102, 102, 0.05)'  }}>
                     </div>
                     <FontAwesomeIcon
                         icon={faCheckCircle}

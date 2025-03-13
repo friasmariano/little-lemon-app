@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import buttonStyles from '../styles/button.module.css';
 
-export default function Modal({ isOpen, onClose, children, title, callBackFunction }) {
+export default function Modal({ isOpen, onClose, children, title, callBackFunction, footer }) {
     const dialogRef = useRef(null)
 
     useEffect(() => {
@@ -67,20 +67,22 @@ export default function Modal({ isOpen, onClose, children, title, callBackFuncti
                 <div style={{ minHeight: '200px', color: '#495E57', padding: '20px 20px 40px 60px'}}>
                     {children}
                 </div>
-                <div style={{ display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              gap: '20px',
-                              borderTop: '1px solid rgba(0, 0, 0, 0.05)',
-                              padding: '22px 0px 26px 10px'}}>
-                    <button className={buttonStyles.default}
-                            onClick={() => {
-                                callBackFunction,
-                                onClose
-                            }}>Confirm</button>
-                    <button className={buttonStyles.cancel}
-                            onClick={onClose}>Cancel</button>
-                </div>
+                {footer ? (
+                    <div style={{ display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '20px',
+                        borderTop: '1px solid rgba(0, 0, 0, 0.05)',
+                        padding: '22px 0px 26px 10px'}}>
+                        <button className={buttonStyles.default}
+                                onClick={() => {
+                                    callBackFunction,
+                                    onClose
+                                }}>Confirm</button>
+                        <button className={buttonStyles.cancel}
+                                onClick={onClose}>Cancel</button>
+                    </div>
+                ) : ''}
             </section>
         </dialog>
     );
