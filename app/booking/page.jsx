@@ -5,7 +5,6 @@ import Hero from "../../components/Hero.jsx";
 import { submitForm } from "../../api/api.jsx";
 
 export default function BookTable() {
-
     return(
         <main>
             <Hero>

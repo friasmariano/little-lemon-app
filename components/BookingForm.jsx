@@ -1,7 +1,7 @@
 'use client'
 
 import { useForm } from 'react-hook-form'
-import { useEffect, useState, useReducer } from 'react'
+import { useState, useReducer } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendar, faCheckCircle, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 import { ErrorMessage } from "@hookform/error-message"
@@ -11,6 +11,7 @@ import styles from '../styles/bookform.module.css'
 import { updateTimes, initializeTimes, RESERVE_TIME } from '../hooks/useAvailableTimes'
 import { fetchAPI } from '../api/api.jsx'
 import { getDate, getMonth, getYear, compareAsc, startOfDay } from 'date-fns'
+import Link from 'next/link'
 
 export default function BookingForm({ sectionNames, submitFunction }) {
     const currentMonth = () => {
@@ -34,8 +35,9 @@ export default function BookingForm({ sectionNames, submitFunction }) {
     }
 
     const [times, dispatch] = useReducer(updateTimes, initializeTimes(fetchAPI(new Date())));
+    const [selectedTime, setSelectedTime] = useState('');
 
-    console.log(times)
+    const [ocassion, setOcassion] = useState('');
 
     const handleChange = (event) => {
         dispatch({ type: RESERVE_TIME, payload: { value: event.target.value } })
@@ -52,16 +54,21 @@ export default function BookingForm({ sectionNames, submitFunction }) {
     });
 
     const onSubmit = (data) => {
-        console.log(data);
+        if (typeof data !== 'undefined' && data !== null) {
+            // Modify object before saving it to localStorage (with properties alone, without the exact 'React Hook Form' data)
+            // localStorage.setItem('reservationData', JSON.stringify(data));
+        }
 
         openModal();
-        // Add redirection
     }
 
     return(
         <>
             <Modal isOpen={isModalOpen} onClose={closeModal} title='Confirmation' footer={false}>
-                <section style={{ display: 'flex', alignItems: 'center'}}>
+                <section style={{ display: 'flex',
+                                  alignItems: 'center',
+                                  flexDirection: 'column'
+                                 }}>
                     <p className="dark-grey"
                         style={{ fontSize: '2.1rem',
                                  textAlign: 'center',
@@ -82,6 +89,16 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                             Reservation submitted successfully
                         </span>
                     </p>
+                    <Link href='/booking/confirmation'
+                          className={buttonStyles.default}
+                          style={{ padding: '5px 0px 10px 0px',
+                                   textAlign: 'center'
+                           }}
+                          onClick={() => {
+                            closeModal()
+                          }}>
+                        View Details
+                    </Link>
                 </section>
               </Modal>
 
@@ -96,29 +113,34 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                         <div className={styles.section}>
                             <label htmlFor="name" className={styles.subtitle}>Name</label>
-                            <input
-                                className={styles.input}
-                                placeholder="Your name here"
-                                id="name"
-                                name="name"
-                                type="text"
-                                defaultValue=""
-                                {...register("name", {
-                                        required: "The 'name' field is required",
-                                        minLength: {
-                                            value: 3,
-                                            message: "The 'name' must be at least '3' characters"
-                                        },
-                                        maxLength: {
-                                            value: 31,
-                                            message: "The 'name' must not exceed '50' characters"
-                                        }
-                                })}
-                                    style={{ textAlign: 'center',
-                                            padding: '0px 0px 0px 15px',
-                                            width: '75px'
-                                    }}
-                            />
+                            <div style={{ position: 'relative',
+                                          display: 'flex'
+                                        }}>
+                                    <input
+                                    className={styles.input}
+                                    placeholder="Your name here"
+                                    id="name"
+                                    name="name"
+                                    type="text"
+                                    defaultValue=""
+                                    {...register("name", {
+                                            required: "The 'name' field is required",
+                                            minLength: {
+                                                value: 3,
+                                                message: "The 'name' must be at least '3' characters"
+                                            },
+                                            maxLength: {
+                                                value: 31,
+                                                message: "The 'name' must not exceed '50' characters"
+                                            }
+                                    })}
+                                        style={{ textAlign: 'center',
+                                                padding: '0px 0px 0px 15px',
+                                                width: '75px'
+                                        }}
+                                />
+                            </div>
+
                         </div>
 
                         <div className={styles.errors}>
@@ -138,29 +160,34 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                         <div className={styles.section}>
                             <label htmlFor="lastname" className={styles.subtitle}>Lastname</label>
-                            <input
-                                className={styles.input}
-                                placeholder="Your lastname here"
-                                id="lastname"
-                                name="lastname"
-                                type="text"
-                                defaultValue=""
-                                {...register("lastname", {
-                                        required: "The 'lastname' field is required",
-                                        minLength: {
-                                            value: 3,
-                                            message: "The 'lastname' must be at least '3' characters"
-                                        },
-                                        maxLength: {
-                                            value: 31,
-                                            message: "The 'lastname' must not exceed '50' characters"
-                                        }
-                                })}
-                                    style={{ textAlign: 'center',
-                                            padding: '0px 0px 0px 15px',
-                                            width: '75px'
-                                    }}
-                            />
+
+                            <div style={{ position: 'relative',
+                                          display: 'flex'
+                                        }}>
+                                <input
+                                    className={styles.input}
+                                    placeholder="Your lastname here"
+                                    id="lastname"
+                                    name="lastname"
+                                    type="text"
+                                    defaultValue=""
+                                    {...register("lastname", {
+                                            required: "The 'lastname' field is required",
+                                            minLength: {
+                                                value: 3,
+                                                message: "The 'lastname' must be at least '3' characters"
+                                            },
+                                            maxLength: {
+                                                value: 31,
+                                                message: "The 'lastname' must not exceed '50' characters"
+                                            }
+                                    })}
+                                        style={{ textAlign: 'center',
+                                                padding: '0px 0px 0px 15px',
+                                                width: '75px'
+                                        }}
+                                />
+                            </div>
                         </div>
 
                         <div className={styles.errors}>
@@ -180,7 +207,11 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                         <div className={styles.section}>
                             <label htmlFor="phone" className={styles.subtitle}>Phone Number</label>
-                            <input
+
+                            <div style={{ position: 'relative',
+                                          display: 'flex'
+                                        }}>
+                                <input
                                 className={styles.input}
                                 placeholder="Your phone here"
                                 id="phone"
@@ -194,11 +225,12 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                                             message: "The 'phone' number has an invalid format"
                                         }
                                 })}
-                                    style={{ textAlign: 'center',
-                                            padding: '0px 0px 0px 15px',
-                                            width: '75px'
-                                    }}
+                                style={{ textAlign: 'center',
+                                        padding: '0px 0px 0px 15px',
+                                        width: '75px'
+                                }}
                             />
+                            </div>
                             <h3 className='grey-md'
                                 style={{  marginTop: '5px',
                                         fontSize: '0.9rem'
@@ -250,6 +282,9 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                                     onChange={(e) => {
                                         setSelectedDate(e.target.value);
                                     }}
+                                    {...register("date", {
+                                        required: "The 'date' field is required"
+                                    })}
                                 />
                                 <span
                                     style={{
@@ -289,11 +324,18 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                                           display: 'flex'
                             }}>
                                 <select id="time"
-                                        onChange={handleChange}
+                                        onChange={ (e) => {
+                                                handleChange();
+                                                setSelectedTime(e.target.value)
+                                            }
+                                        }
                                         style={{ borderRadius: '16px',
                                                 padding: '5px 0px 5px 5px',
                                                 border: '1px solid rgba(102, 102, 102, 0.3)',
-                                                pointerEvents: 'auto !important'}}>
+                                                pointerEvents: 'auto !important'}}
+                                        {...register("time", {
+                                            required: "The 'time' field is required"
+                                        })}>
                                     {times.map((time) =>
                                         <option key={time.id} value={time.value}>
                                             {time.value} {time.available ? '' : '(Reserved)'}
@@ -359,7 +401,14 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                                     style={{ border: '1px solid rgba(102, 102, 102, 0.3)',
                                              borderRadius: '16px',
                                              padding: '5px'
-                                    }}>
+                                    }}
+                                    onChange={ (e) => {
+                                        handleChange();
+                                        setOcassion(e.target.value)
+                                    }}
+                                    {...register("ocassion", {
+                                        required: "The 'ocassion' field is required"
+                                    })}>
                                 <option>Birthday</option>
                                 <option>Anniversary</option>
                             </select>
@@ -410,10 +459,11 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                 </fieldset>
 
                 {/* Submit */}
-                {/* disabled={isValid}> */}
                 <div className={`${styles.submit}`}>
-                    <button className={isValid && isDateValid(selectedDate) ? buttonStyles.default : buttonStyles.disabled}
-                            type="submit">
+                    <button href='/booking/confirmation'
+                          style={{ display: 'flex', padding: '5px 0px 0px 15px' }}
+                          className={isValid && isDateValid(selectedDate) ? buttonStyles.default : buttonStyles.disabled}
+                          type='submit'>
                         Make reservation
                     </button>
                 </div>
