@@ -2,6 +2,7 @@
 
 import BookingForm from "../../components/BookingForm.jsx";
 import Hero from "../../components/Hero.jsx";
+import { submitForm } from "../../api/api.jsx";
 
 export default function BookTable() {
 
@@ -17,6 +18,7 @@ export default function BookTable() {
             </Hero>
             <BookingForm
                 sectionNames={['Personal', 'Reservation', 'Payment']}
+                submitFunction={submitForm}
             />
         </main>
     );

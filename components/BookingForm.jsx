@@ -9,10 +9,10 @@ import Modal from './Modal'
 import buttonStyles from '../styles/button.module.css'
 import styles from '../styles/bookform.module.css'
 import { updateTimes, initializeTimes, RESERVE_TIME } from '../hooks/useAvailableTimes'
-import { fetchAPI, seededRandom, submitAPI } from '../api/api.jsx'
-import { getDate, getMonth, getYear, isFuture, parseISO } from 'date-fns'
+import { fetchAPI } from '../api/api.jsx'
+import { getDate, getMonth, getYear, compareAsc, startOfDay } from 'date-fns'
 
-export default function BookingForm({ sectionNames }) {
+export default function BookingForm({ sectionNames, submitFunction }) {
     const currentMonth = () => {
         let temp = getMonth(new Date()) + 1
 
@@ -24,9 +24,18 @@ export default function BookingForm({ sectionNames }) {
 
     const [month, setMonth] = useState(currentMonth)
 
-    const [currentDate, setCurrentDate] = useState(`${getYear(new Date())}-${month}-${getDate(new Date())}`);
+    const [selectedDate, setSelectedDate] =
+        useState(`${getYear(new Date)}-${month}-${getDate(new Date)}`);
+
+    const [currentDate, setCurrentDate] = useState(`${getYear(new Date)}-${month}-${getDate(new Date)}`);
+
+    const isDateValid = () => {
+        return compareAsc(selectedDate, currentDate) >= 0 ?  true : false
+    }
 
     const [times, dispatch] = useReducer(updateTimes, initializeTimes(fetchAPI(new Date())));
+
+    console.log(times)
 
     const handleChange = (event) => {
         dispatch({ type: RESERVE_TIME, payload: { value: event.target.value } })
@@ -39,7 +48,7 @@ export default function BookingForm({ sectionNames }) {
 
     // Hook Forms
     const { register, handleSubmit, watch, formState: { errors, isValid, isDirty } } = useForm({
-        mode: 'onChange'
+        mode: 'onBlur'
     });
 
     const onSubmit = (data) => {
@@ -229,7 +238,7 @@ export default function BookingForm({ sectionNames }) {
                                     type="date"
                                     id="date"
                                     name="date"
-                                    value={currentDate}
+                                    value={selectedDate}
                                     style={{
                                         padding: '8px',
                                         borderRadius: '5px',
@@ -238,11 +247,8 @@ export default function BookingForm({ sectionNames }) {
                                         cursor: 'pointer',
                                         textAlign: 'center'
                                     }}
-                                    {...register('reservationDate', {
-                                        valueAsDate: true
-                                    })}
                                     onChange={(e) => {
-                                        setCurrentDate(e.target.value)
+                                        setSelectedDate(e.target.value);
                                     }}
                                 />
                                 <span
@@ -261,15 +267,13 @@ export default function BookingForm({ sectionNames }) {
                         </div>
 
                         <div className={styles.errors}>
-                            <ErrorMessage
-                                        errors={errors}
-                                        name="reservationDate"
-                                        render={({ message }) =>
-                                        <p>
-                                            <FontAwesomeIcon icon={faInfoCircle} style={{ marginRight: '5px'}} />
-                                            {message}
-                                        </p>}
-                                    />
+                            {isDateValid(selectedDate)
+                                ? ''
+                                : (
+                                <p>
+                                    The date is invalid.
+                                 </p>
+                            )}
                         </div>
                     </div>
 
@@ -281,18 +285,22 @@ export default function BookingForm({ sectionNames }) {
                         <label className={styles.subtitle}
                                htmlFor="time">Choose time</label>
 
-                        <select id="time"
-                                onChange={handleChange}
-                                style={{ borderRadius: '16px',
-                                         padding: '5px 0px 5px 5px',
-                                         border: '1px solid rgba(102, 102, 102, 0.3)'}}>
-                            {times
-                                .map((time) =>
-                                <option key={time.id} value={time.value}>
-                                    {time.value} {time.available ? '' : '(Reserved)'}
-                                </option>
-                            )}
-                        </select>
+                            <div style={{ position: 'relative',
+                                          display: 'flex'
+                            }}>
+                                <select id="time"
+                                        onChange={handleChange}
+                                        style={{ borderRadius: '16px',
+                                                padding: '5px 0px 5px 5px',
+                                                border: '1px solid rgba(102, 102, 102, 0.3)',
+                                                pointerEvents: 'auto !important'}}>
+                                    {times.map((time) =>
+                                        <option key={time.id} value={time.value}>
+                                            {time.value} {time.available ? '' : '(Reserved)'}
+                                        </option>
+                                    )}
+                                </select>
+                            </div>
                     </div>
 
                     {/* Guests */}
@@ -300,29 +308,35 @@ export default function BookingForm({ sectionNames }) {
                         <div className={styles.section}>
                             <label className={styles.subtitle}
                                 htmlFor="guest">Number of Guests</label>
-                            <input
-                                placeholder='1'
-                                id="guests"
-                                name="day"
-                                type="number"
-                                defaultValue="1"
-                                {...register("guests", {
-                                        min: {
-                                            value: 1,
-                                            message: "The 'guest' list be at least '1'"
-                                        },
-                                        max: {
-                                            value: 31,
-                                            message: "The 'guest' list must not exceed '10'"
-                                        }
-                                })}
-                                    style={{ textAlign: 'center',
-                                            padding: '0px 0px 0px 15px',
-                                            width: '75px',
-                                            borderRadius: '16px',
-                                            border: '1px solid rgba(102, 102, 102, 0.3)',
-                                    }}
-                            />
+
+                            <div style={{ position: 'relative',
+                                          display: 'flex'
+                                        }}>
+
+                                <input
+                                    placeholder='1'
+                                    id="guests"
+                                    name="day"
+                                    type="number"
+                                    defaultValue="1"
+                                    {...register("guests", {
+                                            min: {
+                                                value: 1,
+                                                message: "The 'guest' list be at least '1'"
+                                            },
+                                            max: {
+                                                value: 31,
+                                                message: "The 'guest' list must not exceed '10'"
+                                            }
+                                    })}
+                                        style={{ textAlign: 'center',
+                                                padding: '0px 0px 0px 15px',
+                                                width: '75px',
+                                                borderRadius: '16px',
+                                                border: '1px solid rgba(102, 102, 102, 0.3)',
+                                        }}
+                                />
+                            </div>
                         </div>
                         <div className={styles.errors}>
                             <ErrorMessage
@@ -398,7 +412,7 @@ export default function BookingForm({ sectionNames }) {
                 {/* Submit */}
                 {/* disabled={isValid}> */}
                 <div className={`${styles.submit}`}>
-                    <button className={isValid ? buttonStyles.default : buttonStyles.disabled}
+                    <button className={isValid && isDateValid(selectedDate) ? buttonStyles.default : buttonStyles.disabled}
                             type="submit">
                         Make reservation
                     </button>
