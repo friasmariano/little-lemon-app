@@ -7,6 +7,7 @@ import Header from "../components/Header.jsx";
 import Nav from "../components/Nav.jsx";
 import Main from "../components/Main.jsx";
 import Footer from "../components/Footer.jsx";
+import StoreProvider from './StoreProvider';
 
 export const metadata = {
   title: "Little Lemon Website",
@@ -44,7 +45,9 @@ export default function RootLayout({ children }) {
         <Header />
         <Nav />
         <Main>
+          <StoreProvider>
             {children}
+          </StoreProvider>
         </Main>
         <Footer />
       </body>
