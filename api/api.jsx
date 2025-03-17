@@ -25,5 +25,7 @@ export const fetchAPI = function(date) {
 };
 
 export const submitForm = function(formData) {
-    return true;
+    console.log(formData)
+    // Persist data to localStorage
+    // localStorage.setItem('reservationData', JSON.stringify(formData));
 };

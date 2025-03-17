@@ -54,10 +54,10 @@ export default function BookingForm({ sectionNames, submitFunction }) {
     });
 
     const onSubmit = (data) => {
-        if (typeof data !== 'undefined' && data !== null) {
-            // Modify object before saving it to localStorage (with properties alone, without the exact 'React Hook Form' data)
-            // localStorage.setItem('reservationData', JSON.stringify(data));
-        }
+        // if (typeof data !== 'undefined' && data !== null) {
+        //     // Modify object before saving it to localStorage (with properties alone, without the exact 'React Hook Form' data)
+        //     localStorage.setItem('reservationData', JSON.stringify(data));
+        // }
 
         openModal();
     }
@@ -462,8 +462,11 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                 <div className={`${styles.submit}`}>
                     <button href='/booking/confirmation'
                           style={{ display: 'flex', padding: '5px 0px 0px 15px' }}
-                          className={isValid && isDateValid(selectedDate) ? buttonStyles.default : buttonStyles.disabled}
-                          type='submit'>
+                          className={isValid && isDateValid(selectedDate) 
+                                    ? 
+                                    buttonStyles.default : buttonStyles.disabled}
+                          type='submit'
+                          onClick={submitFunction({ name: 'Test', task: 'submit'})}>
                         Make reservation
                     </button>
                 </div>

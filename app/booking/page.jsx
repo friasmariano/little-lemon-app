@@ -3,8 +3,11 @@
 import BookingForm from "../../components/BookingForm.jsx";
 import Hero from "../../components/Hero.jsx";
 import { submitForm } from "../../api/api.jsx";
+import { useState } from "react";
 
 export default function BookTable() {
+    const [formData, setFormData] = useState({});
+
     return(
         <main>
             <Hero>
