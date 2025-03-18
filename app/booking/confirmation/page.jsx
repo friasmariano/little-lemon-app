@@ -3,18 +3,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons"
 import Hero from "../../../components/Hero"
-import { useState } from "react"
+import { useSelector } from 'react-redux'
 
 export default function BookingConfirmation() {
-    const [bookingData, setBookingData] = useState([]);
-
-    const getBookingData = () => {
-        if (typeof data !== 'undefined' && data !== null) {
-            localStorage.getItem('reservationData');
-
-            setBookingData(JSON.parse(localStorage.getItem('reservationData')));
-        }
-    }
+        const reservationData = useSelector((state) => state.reservation.data);
 
     return (
         <main>
@@ -57,14 +49,107 @@ export default function BookingConfirmation() {
                  />
                 </div>
 
-                <div>
-                    <ul>
-                        {bookingData.map((e, index) => {
-                            return <li key={index}>
-                                {e}
-                            </li>
-                        })}
-                    </ul>
+                <div style={{ display: 'flex',
+                              margin: '20px 0px 30px 0px',
+                              flexDirection: 'column',
+                              alignItems: 'center',
+                              justifyContent: 'center'}}>
+                    <p style={{ display: 'flex',
+                                width: '500px',
+                                height: '30px',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                backgroundColor: 'white',
+                                textAlign: 'center'}}>
+                        <b style={{ marginRight: '10px' }}>Name</b>
+                        <span>
+                            {reservationData.name}
+                        </span>
+                    </p>
+                    <p style={{ display: 'flex',
+                                width: '500px',
+                                height: '30px',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                backgroundColor: 'white',
+                                textAlign: 'center'}}>
+                        <b style={{ marginRight: '10px' }}>Lastname</b>
+                        <span>
+                            {reservationData.lastname}
+                        </span>
+                    </p>
+                    <p style={{ display: 'flex',
+                                width: '500px',
+                                height: '30px',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                backgroundColor: 'white',
+                                textAlign: 'center'}}>
+                        <b style={{ marginRight: '10px' }}>Phone</b>
+                        <span>
+                            {reservationData.phone}
+                        </span>
+                    </p>
+                    <p style={{ display: 'flex',
+                                width: '500px',
+                                height: '30px',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                backgroundColor: 'white',
+                                textAlign: 'center'}}>
+                        <b style={{ marginRight: '10px' }}>Date</b>
+                        <span>
+                            {reservationData.date}
+                        </span>
+                    </p>
+                    <p style={{ display: 'flex',
+                                width: '500px',
+                                height: '30px',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                backgroundColor: 'white',
+                                textAlign: 'center'}}>
+                        <b style={{ marginRight: '10px' }}>Time</b>
+                        <span>
+                            {reservationData.time}
+                        </span>
+                    </p>
+                    <p style={{ display: 'flex',
+                                width: '500px',
+                                height: '30px',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                backgroundColor: 'white',
+                                textAlign: 'center'}}>
+                        <b style={{ marginRight: '10px' }}>Guests</b>
+                        <span>
+                            {reservationData.guest}
+                        </span>
+                    </p>
+                    <p style={{ display: 'flex',
+                                width: '500px',
+                                height: '30px',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                backgroundColor: 'white',
+                                textAlign: 'center'}}>
+                        <b style={{ marginRight: '10px' }}>Ocassion</b>
+                        <span>
+                            {reservationData.ocassion}
+                        </span>
+                    </p>
+                    <p style={{ display: 'flex',
+                                width: '500px',
+                                height: '30px',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                backgroundColor: 'white',
+                                textAlign: 'center'}}>
+                        <b style={{ marginRight: '10px' }}>Credit Card</b>
+                        <span>
+                            {reservationData.creditCard}
+                        </span>
+                    </p>
                 </div>
             </section>
         </main>

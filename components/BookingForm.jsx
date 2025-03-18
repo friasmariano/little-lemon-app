@@ -260,7 +260,7 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                         <div className={styles.section}>
                         <label className={styles.subtitle}
-                            htmlFor="date">Choose time</label>
+                            htmlFor="date">Choose Date</label>
 
                             <div style={{ position: 'relative',
                                         display: 'flex',
