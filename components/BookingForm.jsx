@@ -49,7 +49,7 @@ export default function BookingForm({ sectionNames, submitFunction }) {
     const closeModal = () => setIsModalOpen(false);
 
     // Hook Forms
-    const { register, handleSubmit, watch, formState: { errors, isValid, isDirty } } = useForm({
+    const { register, handleSubmit, watch, formState: { errors, isValid, isDirty }, getValues } = useForm({
         mode: 'onBlur'
     });
 
@@ -60,6 +60,10 @@ export default function BookingForm({ sectionNames, submitFunction }) {
         // }
 
         openModal();
+    }
+
+    const getFormData = () => {
+        return getValues();
     }
 
     return(
@@ -117,28 +121,28 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                                           display: 'flex'
                                         }}>
                                     <input
-                                    className={styles.input}
-                                    placeholder="Your name here"
-                                    id="name"
-                                    name="name"
-                                    type="text"
-                                    defaultValue=""
-                                    {...register("name", {
-                                            required: "The 'name' field is required",
-                                            minLength: {
-                                                value: 3,
-                                                message: "The 'name' must be at least '3' characters"
-                                            },
-                                            maxLength: {
-                                                value: 31,
-                                                message: "The 'name' must not exceed '50' characters"
-                                            }
-                                    })}
+                                        className={styles.input}
+                                        placeholder="Your name here"
+                                        id="name"
+                                        name="name"
+                                        type="text"
+                                        defaultValue=""
+                                        {...register("name", {
+                                                required: "The 'name' field is required",
+                                                minLength: {
+                                                    value: 3,
+                                                    message: "The 'name' must be at least '3' characters"
+                                                },
+                                                maxLength: {
+                                                    value: 31,
+                                                    message: "The 'name' must not exceed '50' characters"
+                                                }
+                                        })}
                                         style={{ textAlign: 'center',
                                                 padding: '0px 0px 0px 15px',
                                                 width: '75px'
                                         }}
-                                />
+                                    />
                             </div>
 
                         </div>
@@ -462,11 +466,11 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                 <div className={`${styles.submit}`}>
                     <button href='/booking/confirmation'
                           style={{ display: 'flex', padding: '5px 0px 0px 15px' }}
-                          className={isValid && isDateValid(selectedDate) 
-                                    ? 
+                          className={isValid && isDateValid(selectedDate)
+                                    ?
                                     buttonStyles.default : buttonStyles.disabled}
                           type='submit'
-                          onClick={submitFunction({ name: 'Test', task: 'submit'})}>
+                          onClick={submitFunction(getFormData())}>
                         Make reservation
                     </button>
                 </div>
