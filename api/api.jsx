@@ -1,4 +1,5 @@
-
+import { useDispatch } from 'react-redux'
+import { update } from '../lib/features/table-reservation/store/reservation-slice'
 
 export const seededRandom = function (seed) {
     var m = 2**35 - 31;
@@ -24,8 +25,17 @@ export const fetchAPI = function(date) {
     return result;
 };
 
-export const submitForm = function(formData) {
-    console.log(formData)
-    // Persist data to localStorage
-    // localStorage.setItem('reservationData', JSON.stringify(formData));
+export const submitForm = function(data) {
+    const dispatch = useDispatch();
+
+    dispatch(update({
+        name: data.name,
+        lastname: data.lastname,
+        phone: data.phone,
+        date: data.date,
+        time: data.time,
+        guest: data.guests,
+        ocassion: data.ocassion,
+        creditCard: data.card
+    }))
 };

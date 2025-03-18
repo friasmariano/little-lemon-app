@@ -123,7 +123,7 @@ export default function BookingConfirmation() {
                                 textAlign: 'center'}}>
                         <b style={{ marginRight: '10px' }}>Guests</b>
                         <span>
-                            {reservationData.guest}
+                            {reservationData.guests}
                         </span>
                     </p>
                     <p style={{ display: 'flex',
