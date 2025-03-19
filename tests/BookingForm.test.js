@@ -1,7 +1,5 @@
 
-import { render, screen } from '@testing-library/react'
 import { test, expect } from '@jest/globals'
-import BookingForm from '../components/BookingForm'
 import { fetchAPI } from '../api/api'
 import { RESERVE_TIME, initializeTimes, updateTimes } from '../hooks/useAvailableTimes'
 

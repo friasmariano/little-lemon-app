@@ -60,6 +60,9 @@ export default function BookingForm({ sectionNames, submitFunction }) {
         // }
 
         openModal();
+
+
+        submitFunction(getFormData());
     }
 
     const getFormData = () => {
@@ -116,15 +119,15 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                     {/* Name */}
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                         <div className={styles.section}>
-                            <label htmlFor="name" className={styles.subtitle}>Name</label>
+                            <label htmlFor="firstname" className={styles.subtitle}>Firstname</label>
                             <div style={{ position: 'relative',
                                           display: 'flex'
                                         }}>
                                     <input
                                         className={styles.input}
                                         placeholder="Your name here"
-                                        id="name"
-                                        name="name"
+                                        id="firstname"
+                                        name="firstname"
                                         type="text"
                                         defaultValue=""
                                         {...register("name", {
@@ -263,8 +266,7 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                     {/* Date */}
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                         <div className={styles.section}>
-                        <label className={styles.subtitle}
-                            htmlFor="date">Choose Date</label>
+                        <label className={styles.subtitle} htmlFor="date">Choose Date</label>
 
                             <div style={{ position: 'relative',
                                         display: 'flex',
@@ -353,7 +355,7 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                         <div className={styles.section}>
                             <label className={styles.subtitle}
-                                htmlFor="guest">Number of Guests</label>
+                                htmlFor="guests">Number of Guests</label>
 
                             <div style={{ position: 'relative',
                                           display: 'flex'
@@ -362,7 +364,7 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                                 <input
                                     placeholder='1'
                                     id="guests"
-                                    name="day"
+                                    name="guests"
                                     type="number"
                                     defaultValue="1"
                                     {...register("guests", {
@@ -468,8 +470,7 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                             style={{ display: 'flex', padding: '5px 0px 0px 15px' }}
                             className={isValid && isDateValid(selectedDate) ?
                                        buttonStyles.default : buttonStyles.disabled}
-                            type='submit'
-                            onClick={submitFunction(getFormData())}>
+                            type='submit'>
                         Make reservation
                     </button>
                 </div>
