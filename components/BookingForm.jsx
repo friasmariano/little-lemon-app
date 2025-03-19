@@ -26,9 +26,9 @@ export default function BookingForm({ sectionNames, submitFunction }) {
     const [month, setMonth] = useState(currentMonth)
 
     const [selectedDate, setSelectedDate] =
-        useState(`${getYear(new Date)}-${month}-${getDate(new Date)}`);
+        useState(`${getYear(new Date())}-${month}-${getDate(new Date())}`);
 
-    const [currentDate, setCurrentDate] = useState(`${getYear(new Date)}-${month}-${getDate(new Date)}`);
+    const [currentDate, setCurrentDate] = useState(`${getYear(new Date())}-${month}-${getDate(new Date())}`);
 
     const isDateValid = () => {
         return compareAsc(selectedDate, currentDate) >= 0 ?  true : false
@@ -131,7 +131,7 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                                         type="text"
                                         defaultValue=""
                                         {...register("name", {
-                                                required: "The 'name' field is required",
+                                                required: "The firstname  is required",
                                                 minLength: {
                                                     value: 3,
                                                     message: "The 'name' must be at least '3' characters"
@@ -150,16 +150,11 @@ export default function BookingForm({ sectionNames, submitFunction }) {
 
                         </div>
 
-                        <div className={styles.errors}>
-                            <ErrorMessage
-                                errors={errors}
-                                name="name"
-                                render={({ message }) =>
-                                <p>
-                                    <FontAwesomeIcon icon={faInfoCircle} style={{ marginRight: '5px'}} />
-                                    {message}
-                                </p>}
-                            />
+                        <div>
+                            {errors.name ? (
+                                <p className={styles.errors}>{errors.name.message}</p>
+                            )
+                            : <p className={styles.success}>The firstname is valid.</p>}
                         </div>
                     </div>
 
@@ -179,7 +174,7 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                                     type="text"
                                     defaultValue=""
                                     {...register("lastname", {
-                                            required: "The 'lastname' field is required",
+                                            required: "The lastname is required",
                                             minLength: {
                                                 value: 3,
                                                 message: "The 'lastname' must be at least '3' characters"
@@ -197,16 +192,11 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                             </div>
                         </div>
 
-                        <div className={styles.errors}>
-                            <ErrorMessage
-                                errors={errors}
-                                name="lastname"
-                                render={({ message }) =>
-                                <p>
-                                    <FontAwesomeIcon icon={faInfoCircle} style={{ marginRight: '5px'}} />
-                                    {message}
-                                </p>}
-                            />
+                        <div>
+                            {errors.lastname ? (
+                                    <p className={styles.errors}>{errors.lastname.message}</p>
+                                )
+                                : <p className={styles.success}>The lastname is valid.</p>}
                         </div>
                     </div>
 
@@ -269,9 +259,8 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                         <label className={styles.subtitle} htmlFor="date">Choose Date</label>
 
                             <div style={{ position: 'relative',
-                                        display: 'flex',
-                                        width: '150px'
-                            }}>
+                                          display: 'flex',
+                                          width: '150px'}}>
                                 <input
                                     type="date"
                                     id="date"

@@ -1,11 +1,10 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom';
-import Modal from '../components/Modal';
 
-import BookingForm from '../components/BookingForm'
+import BookingForm from '../../components/BookingForm'
 import React from 'react';
 
-jest.mock('../Components/Modal', () => {
+jest.mock('../../Components/Modal', () => {
     return ({ isOpen, onClose}) => {
         const dialogRef = { current: { close: jest.fn(), showModal: jest.fn() } }
 

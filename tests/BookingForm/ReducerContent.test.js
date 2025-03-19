@@ -1,7 +1,7 @@
 
 import { test, expect } from '@jest/globals'
-import { fetchAPI } from '../api/api'
-import { RESERVE_TIME, initializeTimes, updateTimes } from '../hooks/useAvailableTimes'
+import { fetchAPI } from '../../api/api'
+import { RESERVE_TIME, initializeTimes, updateTimes } from '../../hooks/useAvailableTimes'
 
 test('Returns a non-empty array of available booking times', () => {
     const date = new Date();

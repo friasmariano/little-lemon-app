@@ -1,5 +1,5 @@
 
-import { makeStore } from "../lib/store";
+import { makeStore } from "../../lib/store";
 
 beforeAll(() => {
     global.localStorage.clear();

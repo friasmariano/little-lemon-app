@@ -53,6 +53,21 @@
     align-items: center;
 }
 
+.success {
+    display: flex;
+    flex-direction: column;
+
+    color: rgb(8, 119, 54);
+
+    margin: 10px 0px 10px 0px;
+    min-width: 400px;
+
+    justify-content: center;
+
+    font-size: 0.95rem;
+    align-items: center;
+}
+
 .submit {
     margin-top: 40px;
 
