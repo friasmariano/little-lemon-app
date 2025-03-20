@@ -23,6 +23,8 @@ export default function BookingForm({ sectionNames, submitFunction }) {
         return temp
     }
 
+    const [isExpanded, setIsExpanded] = useState(false);
+
     const [month, setMonth] = useState(currentMonth)
 
     const [selectedDate, setSelectedDate] =
@@ -141,6 +143,9 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                                                     message: "The 'name' must not exceed '50' characters"
                                                 }
                                         })}
+                                        aria-invalid={errors.name ? 'true' : 'false'}
+                                        aria-describedby='Firstname-error'
+                                        aria-required='true'
                                         style={{ textAlign: 'center',
                                                 padding: '0px 0px 0px 15px',
                                                 width: '75px'
@@ -150,7 +155,7 @@ export default function BookingForm({ sectionNames, submitFunction }) {
 
                         </div>
 
-                        <div style={{ marginTop: '5px'}}>
+                        <div style={{ marginTop: '5px'}} aria-live="polite">
                             {errors.name ? (
                                 <p className={styles.errors}>{errors.name.message}</p>
                             )
@@ -186,15 +191,18 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                                                 message: "The 'lastname' must not exceed '50' characters"
                                             }
                                     })}
-                                        style={{ textAlign: 'center',
-                                                padding: '0px 0px 0px 15px',
-                                                width: '75px'
-                                        }}
+                                    style={{ textAlign: 'center',
+                                            padding: '0px 0px 0px 15px',
+                                            width: '75px'
+                                    }}
+                                    aria-invalid={errors.lastname ? 'true' : 'false'}
+                                    aria-describedby='Lastname-error'
+                                    aria-required='true'
                                 />
                             </div>
                         </div>
 
-                        <div>
+                        <div aria-live="polite">
                             {errors.lastname ? (
                                     <p className={styles.errors}>{errors.lastname.message}</p>
                                 )
@@ -226,15 +234,18 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                                                 message: 'Email format is invalid'
                                             }
                                     })}
-                                        style={{ textAlign: 'center',
-                                                padding: '0px 0px 0px 15px',
-                                                width: '75px'
-                                        }}
+                                    style={{ textAlign: 'center',
+                                            padding: '0px 0px 0px 15px',
+                                            width: '75px'
+                                    }}
+                                    aria-invalid={errors.email ? 'true' : 'false'}
+                                    aria-describedby='Email-error'
+                                    aria-required='true'
                                 />
                             </div>
                         </div>
 
-                        <div>
+                        <div aria-live="polite">
                             {errors.email ? (
                                     <p className={styles.errors}>{errors.email.message}</p>
                                 )
@@ -269,6 +280,9 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                                         padding: '0px 0px 0px 15px',
                                         width: '75px'
                                 }}
+                                aria-invalid={errors.phone ? 'true' : 'false'}
+                                aria-describedby='Phone-error'
+                                aria-required='true'
                             />
                             </div>
                             <h3 className='grey-md'
@@ -278,7 +292,7 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                             }}>(optional)</h3>
                         </div>
 
-                        <div>
+                        <div aria-live="polite">
                             {errors.phone ? (
                                     <p className={styles.errors}>{errors.phone.message}</p>
                                 )
@@ -318,6 +332,7 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                                     {...register("date", {
                                         required: "The 'date' field is required"
                                     })}
+                                    aria-label='Choose reservation date'
                                 />
                                 <span
                                     style={{
@@ -334,7 +349,7 @@ export default function BookingForm({ sectionNames, submitFunction }) {
 
                         </div>
 
-                        <div className={styles.errors}>
+                        <div className={styles.errors} aria-live="polite">
                             {isDateValid(selectedDate)
                                 ? ''
                                 : (
@@ -362,13 +377,17 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                                                 setSelectedTime(e.target.value)
                                             }
                                         }
+                                        onFocus={() => { setIsExpanded(true) }}
+                                        onBlur={() => { setIsExpanded(false) }}
                                         style={{ borderRadius: '16px',
                                                 padding: '5px 0px 5px 5px',
                                                 border: '1px solid rgba(102, 102, 102, 0.3)',
                                                 pointerEvents: 'auto !important'}}
                                         {...register("time", {
                                             required: "The 'time' field is required"
-                                        })}>
+                                        })}
+                                        aria-labelledby='Choose time'
+                                        aria-expanded={isExpanded}>
                                     {times.map((time) =>
                                         <option key={time.id} value={time.value}>
                                             {time.value} {time.available ? '' : '(Reserved)'}
@@ -477,7 +496,7 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                             />
                         </div>
 
-                        <div>
+                        <div aria-live="polite">
                             {errors.card ? (<p className={styles.errors}>{errors.card.message}</p>)
                             : dirtyFields.card && (<p className={styles.success}>The card is valid</p>)}
                         </div>
