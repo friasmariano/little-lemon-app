@@ -58,6 +58,25 @@ test("It confirms 'lastname' input shows a valid message", async () => {
     })
 })
 
+test("It confirms 'email' input shows a valid message", async () => {
+    render(<BookingForm />);
+
+    const emailInput = screen.getByLabelText(/Email/i);
+
+    // Invalid
+    fireEvent.blur(emailInput);
+    await waitFor(() => {
+        expect(screen.getByText('The email is required'));
+    })
+
+    // Valid
+    userEvent.type(emailInput, 'info@johnharris.com');
+    fireEvent.blur(emailInput);
+    await waitFor(() => {
+        expect(screen.queryByText('The email is valid'));
+    })
+})
+
 test("It confirms 'phone' input shows a valid message", async () => {
     render(<BookingForm />);
 

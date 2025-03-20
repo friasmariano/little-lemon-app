@@ -61,7 +61,6 @@ export default function BookingForm({ sectionNames, submitFunction }) {
 
         openModal();
 
-
         submitFunction(getFormData());
     }
 
@@ -110,7 +109,8 @@ export default function BookingForm({ sectionNames, submitFunction }) {
               </Modal>
 
             <form onSubmit={handleSubmit(onSubmit)}
-                  className={styles.container}>
+                  className={styles.container} role="form"
+                  data-testid="booking-form">
 
                 {/* Personal */}
                 <fieldset className={styles.fieldset}>
@@ -131,7 +131,7 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                                         type="text"
                                         defaultValue=""
                                         {...register("name", {
-                                                required: "The firstname  is required",
+                                                required: "The firstname is required",
                                                 minLength: {
                                                     value: 3,
                                                     message: "The 'name' must be at least '3' characters"
@@ -159,7 +159,9 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                     </div>
 
                     {/* Lastname */}
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column',
+                                  alignItems: 'center',
+                                  marginTop: '10px'}}>
                         <div className={styles.section}>
                             <label htmlFor="lastname" className={styles.subtitle}>Lastname</label>
 
@@ -197,6 +199,46 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                                     <p className={styles.errors}>{errors.lastname.message}</p>
                                 )
                                 : dirtyFields.lastname && (<p className={styles.success}>The lastname is valid</p>)}
+                        </div>
+                    </div>
+
+                    {/* Email */}
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center',
+                                  margin: '10px'
+                     }}>
+                        <div className={styles.section}>
+                            <label htmlFor="email" className={styles.subtitle}>Email</label>
+
+                            <div style={{ position: 'relative',
+                                          display: 'flex'
+                                        }}>
+                                <input
+                                    className={styles.input}
+                                    placeholder="Your email here"
+                                    id="email"
+                                    name="email"
+                                    type="text"
+                                    defaultValue=""
+                                    {...register("email", {
+                                            required: "The email is required",
+                                            pattern: {
+                                                value: /^\S+@\S+\.\S+$/,
+                                                message: 'Email format is invalid'
+                                            }
+                                    })}
+                                        style={{ textAlign: 'center',
+                                                padding: '0px 0px 0px 15px',
+                                                width: '75px'
+                                        }}
+                                />
+                            </div>
+                        </div>
+
+                        <div>
+                            {errors.email ? (
+                                    <p className={styles.errors}>{errors.email.message}</p>
+                                )
+                                : dirtyFields.email && (<p className={styles.success}>The email is valid</p>)}
                         </div>
                     </div>
 
@@ -340,7 +382,7 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                         <div className={styles.section}>
                             <label className={styles.subtitle}
-                                htmlFor="guests">Number of Guests</label>
+                                htmlFor="guests">Guests</label>
 
                             <div style={{ position: 'relative',
                                           display: 'flex'
@@ -448,8 +490,9 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                             style={{ display: 'flex', padding: '5px 0px 0px 15px' }}
                             className={isValid && isDateValid(selectedDate) ?
                                        buttonStyles.default : buttonStyles.disabled}
+                            role='button'
                             type='submit'>
-                        Make reservation
+                        Submit
                     </button>
                 </div>
 
