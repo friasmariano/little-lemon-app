@@ -49,7 +49,7 @@ export default function BookingForm({ sectionNames, submitFunction }) {
     const closeModal = () => setIsModalOpen(false);
 
     // Hook Forms
-    const { register, handleSubmit, watch, formState: { errors, isValid, isDirty }, getValues } = useForm({
+    const { register, handleSubmit, watch, formState: { errors, isValid, isDirty, dirtyFields }, getValues } = useForm({
         mode: 'onBlur'
     });
 
@@ -150,11 +150,11 @@ export default function BookingForm({ sectionNames, submitFunction }) {
 
                         </div>
 
-                        <div>
+                        <div style={{ marginTop: '5px'}}>
                             {errors.name ? (
                                 <p className={styles.errors}>{errors.name.message}</p>
                             )
-                            : <p className={styles.success}>The firstname is valid.</p>}
+                            : dirtyFields.name && (<p className={styles.success}>The firstname is valid.</p>)}
                         </div>
                     </div>
 
@@ -196,14 +196,15 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                             {errors.lastname ? (
                                     <p className={styles.errors}>{errors.lastname.message}</p>
                                 )
-                                : <p className={styles.success}>The lastname is valid.</p>}
+                                : dirtyFields.lastname && (<p className={styles.success}>The lastname is valid</p>)}
                         </div>
                     </div>
 
                     {/* Phone number */}
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column',
+                                  alignItems: 'center'}}>
                         <div className={styles.section}>
-                            <label htmlFor="phone" className={styles.subtitle}>Phone Number</label>
+                            <label htmlFor="phone" className={styles.subtitle}>Phone</label>
 
                             <div style={{ position: 'relative',
                                           display: 'flex'
@@ -216,7 +217,7 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                                 type="text"
                                 defaultValue=""
                                 {...register("phone", {
-                                        required: "The 'phone' field is required",
+                                        required: "The phone is required",
                                         pattern: {
                                             value: /^\+?[1-9]\d{1,14}$/,
                                             message: "The 'phone' number has an invalid format"
@@ -235,16 +236,11 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                             }}>(optional)</h3>
                         </div>
 
-                        <div className={styles.errors}>
-                            <ErrorMessage
-                                errors={errors}
-                                name="phone"
-                                render={({ message }) =>
-                                <p>
-                                    <FontAwesomeIcon icon={faInfoCircle} style={{ marginRight: '5px'}} />
-                                    {message}
-                                </p>}
-                            />
+                        <div>
+                            {errors.phone ? (
+                                    <p className={styles.errors}>{errors.phone.message}</p>
+                                )
+                                : dirtyFields.phone && (<p className={styles.success}>The phone is valid</p>)}
                         </div>
                     </div>
                 </fieldset>
@@ -416,7 +412,7 @@ export default function BookingForm({ sectionNames, submitFunction }) {
 
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                         <div className={styles.section}>
-                            <label htmlFor="card" className={styles.subtitle}>Credit Card</label>
+                            <label htmlFor="card" className={styles.subtitle}>Card</label>
                             <input
                                 className={styles.input}
                                 placeholder="Your credit card here"
@@ -425,7 +421,7 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                                 type="text"
                                 defaultValue=""
                                 {...register("card", {
-                                        required: "The 'card' field is required",
+                                        required: "The card is required",
                                         pattern: {
                                             value: /4[0-9]{12}(?:[0-9]{3})?$/,
                                             message: "The 'credit card' has an invalid format"
@@ -439,16 +435,9 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                             />
                         </div>
 
-                        <div className={styles.errors}>
-                            <ErrorMessage
-                                errors={errors}
-                                name="card"
-                                render={({ message }) =>
-                                <p>
-                                    <FontAwesomeIcon icon={faInfoCircle} style={{ marginRight: '5px'}} />
-                                    {message}
-                                </p>}
-                            />
+                        <div>
+                            {errors.card ? (<p className={styles.errors}>{errors.card.message}</p>)
+                            : dirtyFields.card && (<p className={styles.success}>The card is valid</p>)}
                         </div>
                     </div>
                 </fieldset>

@@ -37,7 +37,6 @@ test("It confirms 'firstname' input shows a valid message", async () => {
     await waitFor(() => {
         expect(screen.queryByText('The firstname is valid'));
     })
-
 })
 
 test("It confirms 'lastname' input shows a valid message", async () => {
@@ -57,5 +56,42 @@ test("It confirms 'lastname' input shows a valid message", async () => {
     await waitFor(() => {
         expect(screen.queryByText('The lastname is valid'));
     })
+})
 
+test("It confirms 'phone' input shows a valid message", async () => {
+    render(<BookingForm />);
+
+    const phoneInput = screen.getByLabelText(/phone/i);
+
+    // Invalid
+    fireEvent.blur(phoneInput);
+    await waitFor(() => {
+        expect(screen.getByText('The phone is required'));
+    })
+
+    // Valid
+    userEvent.type(phoneInput, '1234567890');
+    fireEvent.blur(phoneInput);
+    await waitFor(() => {
+        expect(screen.queryByText('The phone is valid'));
+    })
+})
+
+test("It confirms 'card' input shows a valid message", async () => {
+    render(<BookingForm />);
+
+    const cardInput = screen.getByLabelText(/card/i);
+
+    // Invalid
+    fireEvent.blur(cardInput);
+    await waitFor(() => {
+        expect(screen.getByText('The card is required'));
+    })
+
+    // Valid
+    userEvent.type(cardInput, '2039-1672-1227-5618');
+    fireEvent.blur(cardInput);
+    await waitFor(() => {
+        expect(screen.queryByText('The card is valid'));
+    })
 })
