@@ -505,13 +505,16 @@ export default function BookingForm({ sectionNames, submitFunction }) {
 
                 {/* Submit */}
                 <div className={`${styles.submit}`}>
-                    <button href='/booking/confirmation'
-                            style={{ display: 'flex', padding: '5px 0px 0px 15px' }}
+                    <button style={{ display: 'flex', padding: '5px 0px 0px 15px' }}
                             className={isValid && isDateValid(selectedDate) ?
                                        buttonStyles.default : buttonStyles.disabled}
                             role='button'
                             type='submit'>
                         Submit
+                    </button>
+                    <button style={{ display: 'flex', padding: '5px 0px 0px 15px' }}
+                            className={buttonStyles.secondary}>
+                        Cancel
                     </button>
                 </div>
 
