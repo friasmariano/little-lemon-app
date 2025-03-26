@@ -10,6 +10,7 @@ import Testimonials from "../components/Testimonials.jsx";
 import Testimonial from "../components/Testimonial.jsx";
 import About from "../components/About.jsx";
 import { useRouter } from "next/navigation";
+import boxStyles from '../styles/box.module.css';
 
 export default function Home() {
   const router = useRouter();
@@ -40,15 +41,15 @@ export default function Home() {
                   onClick={reserveATable}>Reserve a Table</button>
         </div>
 
-        <div className={styles.section}>
+        <div className={`${styles.section} ${boxStyles.box}`}>
           <Image
             src="/restauranfood.jpg"
             alt="food"
             width={300}
             height={300}
-            style={{ width: '250px', 
-                     borderRadius: '16px', 
-                     marginLeft: '40px', 
+            style={{ width: '250px',
+                     borderRadius: '16px',
+                     marginLeft: '40px',
                      marginBottom: '-50px',
                      boxShadow: '0 5px 20px rgba(0, 0, 0, 0.5)',
                      zIndex: '3'

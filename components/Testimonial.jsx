@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faStar, faStarHalf } from "@fortawesome/free-solid-svg-icons"
 import Image from "next/image"
 import { useEffect, useState } from "react"
+import boxStyles from "../styles/box.module.css"
 
 export default function Testimonial({ rating, avatar, comment, user }) {
     const [stars, setStars] = useState([{}]);
@@ -43,7 +44,8 @@ export default function Testimonial({ rating, avatar, comment, user }) {
                       padding: '22px',
                       display: 'flex',
                       flexDirection: 'column',
-                      boxShadow: '1px 2px 20px rgba(0, 0, 0, 0.3)'}}>
+                      boxShadow: '1px 2px 20px rgba(0, 0, 0, 0.3)'}}
+              className={boxStyles.box}>
 
             <div style={{ fontWeight: '600' }}>
                 {stars.map((star, index) => {

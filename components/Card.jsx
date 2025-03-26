@@ -2,10 +2,11 @@ import cardS from '../styles/card.module.css'
 import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import boxStyles from '../styles/box.module.css'
 
 export default function Card({image, header, description, callToAction}) {
     return(
-        <section className={cardS.container}>
+        <section className={`${cardS.container} ${boxStyles.box}`}>
             <div style={{ width: '250px',
                             height: '420px',
                             borderRadius: '16px',
