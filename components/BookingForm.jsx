@@ -51,8 +51,20 @@ export default function BookingForm({ sectionNames, submitFunction }) {
     const closeModal = () => setIsModalOpen(false);
 
     // Hook Forms
-    const { register, handleSubmit, watch, formState: { errors, isValid, isDirty, dirtyFields }, getValues } = useForm({
-        mode: 'onBlur'
+    const { register, handleSubmit, clearErrors, reset, watch, formState: { errors, isValid, isDirty, dirtyFields }, getValues } = 
+            useForm({
+                mode: 'onBlur',
+                defaultValues: {
+                    name: '',
+                    lastname: '',
+                    email: '',
+                    phone: '',
+                    date: currentDate,
+                    time: '17:30',
+                    guests: '1',
+                    ocassion: 'Birthday',
+                    card: ''
+                }
     });
 
     const onSubmit = (data) => {
@@ -64,6 +76,11 @@ export default function BookingForm({ sectionNames, submitFunction }) {
         openModal();
 
         submitFunction(getFormData());
+    }
+
+    const resetForm = () => {
+        reset();
+        clearErrors();
     }
 
     const getFormData = () => {
@@ -513,7 +530,9 @@ export default function BookingForm({ sectionNames, submitFunction }) {
                         Submit
                     </button>
                     <button style={{ display: 'flex', padding: '5px 0px 0px 15px' }}
-                            className={buttonStyles.secondary}>
+                            className={buttonStyles.secondary}
+                            type='button'
+                            onClick={() => resetForm() }>
                         Cancel
                     </button>
                 </div>
