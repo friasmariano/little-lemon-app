@@ -35,7 +35,6 @@ export default function Testimonial({ rating, avatar, comment, user }) {
         setStars(tempArray);
     }, [rating])
 
-
     return(
         <div style={{ width: '216px',
                       backgroundColor: 'white',

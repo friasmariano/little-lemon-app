@@ -42,14 +42,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${karla.variable} ${markaziText.variable}`}>
-        <Header />
-        <Nav />
-        <Main>
-          <StoreProvider>
-            {children}
+        <StoreProvider>
+          <Header />
+          <Nav />
+          <Main>
+              {children}
+          </Main>
+          <Footer />
           </StoreProvider>
-        </Main>
-        <Footer />
       </body>
     </html>
   );

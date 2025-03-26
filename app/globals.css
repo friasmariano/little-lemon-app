@@ -43,7 +43,8 @@ body {
   grid-template-rows: auto auto auto auto;
 
   color: var(--foreground);
-  background: var(--background);
+  /* background: var(--background); */
+  background: var(--green-primary);
 
   font-family: var(--font-karla);
 }
@@ -80,6 +81,9 @@ body {
 
   justify-content: center;
 
+  border: 1px solid white;
+
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
 }
 
 
@@ -257,4 +261,13 @@ body {
 
   flex: 1 1 auto;
   text-align: left;
+}
+
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
 }

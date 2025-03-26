@@ -88,3 +88,29 @@
         font-size: 1.05rem;
     }
 }
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.fadeOut {
+    animation-name: fadeOut;
+    animation-duration: 1.35;
+    transition-timing-function: ease-in-out;
+}
+
+@keyframes slideDown {
+    0% {
+        transform: translateY(-100px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.slideDown {
+    animation-name: slideDown;
+    animation-duration: 1s;
+    transition-timing-function: ease-in-out;
+}

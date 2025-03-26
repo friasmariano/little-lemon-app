@@ -1,12 +1,50 @@
+'use client';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from '../styles/nav.module.css';
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { toggle } from '../lib/features/nav/store/nav-slice';
 
 export default function Nav () {
+    const dispatch = useDispatch();
+    const [prevScrollPos, setPrevScrollPos] = useState(0);
+    const [currentScrollPos, setCurrentScrollPos] = useState(0);
+    const [translateYPos, setTranslateYPos] = useState("");
+    const [isDescending, setIsDescending] = useState(true);
+    const isOpen = useSelector((state) => state.nav.data.isOpen);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setPrevScrollPos(window.scrollY);
+
+            setTimeout(() => {
+            setCurrentScrollPos(window.scrollY);
+            }, 250);
+
+            if (currentScrollPos < prevScrollPos) {
+            setTranslateYPos('-200px');
+            setIsDescending(false);
+            } else {
+            setTranslateYPos('0px');
+            setIsDescending(true);
+            }
+        }
+
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        }
+
+    }, [window.scrollY]);
+
     return (
-        <nav className="nav">
+        <nav className={`nav ${isDescending ? styles.slideDown : 'fadeOut'}`}
+             style={{ translate: `0px ${translateYPos}`}}>
             <div className={styles.burgerSection}>
                 {/* Hide/Show using state */}
                 <FontAwesomeIcon icon={faBars}

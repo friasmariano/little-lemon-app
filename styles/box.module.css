@@ -1,0 +1,10 @@
+.box {
+    border: 1px solid red;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.box:hover {
+    transform: scale(2);
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
+}

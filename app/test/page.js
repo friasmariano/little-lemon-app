@@ -3,7 +3,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { update } from '../../lib/features/table-reservation/store/reservation-slice'
 import Hero from '../../components/Hero';
-import buttonStyles from '../../styles/button.module.css'
+import styles from '../../styles/box.module.css';
 
 export default function Test() {
     const dispatch = useDispatch();
@@ -27,31 +27,9 @@ export default function Test() {
             <Hero>
                 Test
             </Hero>
-            <div style={{ display: 'flex',
-                          flexDirection: 'column',
-                          alignItems: 'center',
-                          gap: '20px',
-                          paddingTop: '20px' }}>
-                <h1 style={{ fontSize: '1.5rem', fontWeight: '600' }}>Reservation data</h1>
-                <div>
-                    <p><b>Name: </b>{reservationData.name}</p>
-                    <p><b>Lastname: </b>{reservationData.lastname}</p>
-                    <p><b>Phone: </b>{reservationData.phone}</p>
-                    <p><b>Date: </b>{reservationData.date}</p>
-                    <p><b>Time: </b>{reservationData.time}</p>
-                    <p><b>Guest: </b>{reservationData.guest}</p>
-                    <p><b>Ocassion: </b>{reservationData.ocassion}</p>
-                    <p><b>Credit Card: </b>{reservationData.creditCard}</p>
-                </div>
-            </div>
-            <div style={{ display: 'flex',
-                          alignItems: 'center',
-                          margin: 'auto',
-                          padding: '10px 0px 20px 10px',
-                          gap: '10px'}}>
-                <button className={buttonStyles.default}
-                        onClick={handleClick}>Add</button>
-
+            <div className={styles.card}>
+                <h2>Card Title</h2>
+                <p>This is a description.</p>
             </div>
         </section>
     )
