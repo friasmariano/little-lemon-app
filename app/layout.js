@@ -49,7 +49,7 @@ export default function RootLayout({ children }) {
               {children}
           </Main>
           <Footer />
-          </StoreProvider>
+        </StoreProvider>
       </body>
     </html>
   );
